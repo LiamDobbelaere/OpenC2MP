@@ -1,0 +1,29 @@
+{
+  "name": "openc2mp-master-server",
+  "version": "1.0.0",
+  "description": "The master server for OpenC2MP",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomDobbelaere/OpenC2MP.git"
+  },
+  "keywords": [
+    "openc2mp",
+    "master",
+    "server"
+  ],
+  "author": "Tom Dobbelaere",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TomDobbelaere/OpenC2MP/issues"
+  },
+  "homepage": "https://github.com/TomDobbelaere/OpenC2MP#readme",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2"
+  }
+}
