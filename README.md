@@ -1,4 +1,4 @@
-![OpenC2MP](Other/logo_banner.png)
+![OpenC2MP](Other/logo.png)
 
 **Note: this project is not ready for use**
 
