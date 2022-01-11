@@ -1,5 +1,5 @@
 ![OpenC2MP](Other/logo.png)
-<sup>fontmageddon by jbensch(https://fonts2u.com/fontmageddon.font) </sup>
+[fontmageddon by jbensch](https://fonts2u.com/fontmageddon.font)
 
 **Note: this project is not ready for use**
 
