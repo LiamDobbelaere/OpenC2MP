@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2MP", "C2MP\C2MP.csproj", "{C79C0692-A552-49D1-9402-9812958E6767}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F6042AB9-BBB7-4348-999F-15CDE76AA880} = {F6042AB9-BBB7-4348-999F-15CDE76AA880}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2MP.Core", "C2MPCore\C2MP.Core.csproj", "{F6042AB9-BBB7-4348-999F-15CDE76AA880}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C79C0692-A552-49D1-9402-9812958E6767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C79C0692-A552-49D1-9402-9812958E6767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C79C0692-A552-49D1-9402-9812958E6767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C79C0692-A552-49D1-9402-9812958E6767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6042AB9-BBB7-4348-999F-15CDE76AA880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6042AB9-BBB7-4348-999F-15CDE76AA880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6042AB9-BBB7-4348-999F-15CDE76AA880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6042AB9-BBB7-4348-999F-15CDE76AA880}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76845020-AD0B-488B-8E9C-32685CB496A0}
+	EndGlobalSection
+EndGlobal
