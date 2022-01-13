@@ -1,4 +1,4 @@
-![OpenC2MP](Other/logo_nobg_small.png)
+![OpenC2MP](Other/logo_nobg_small.png)  
 [fontmageddon by jbensch](https://fonts2u.com/fontmageddon.font)
 
 **Note: this project is not ready for use**
