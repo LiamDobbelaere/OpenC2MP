@@ -32,7 +32,7 @@ namespace C2MP.Core
         public void Run()
         {
             Thread thread = new Thread(() => new ServerSetupThread(loggingModule).Run());
-            //thread.Name = "ServerSetupThread";
+            thread.Name = "ServerSetupThread";
             thread.Start();
         }
 
