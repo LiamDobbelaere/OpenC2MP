@@ -16,6 +16,8 @@ namespace C2MP
         {
             InitializeComponent();
 
+            this.boldFont = new Font(this.rtbLog.Font, FontStyle.Bold);
+
             this.main = new Main();
 
             AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
@@ -28,7 +30,7 @@ namespace C2MP
             txtChatCommands.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtChatCommands.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            this.main.LogMessage += Main_LogMessage;
+            this.main.loggingModule.LogMessage += Main_LogMessage;
         }
 
         private void Main_LogMessage(object sender, string message, LogMessageKind kind = LogMessageKind.INFO)
@@ -38,8 +40,6 @@ namespace C2MP
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.boldFont = new Font(this.rtbLog.Font, FontStyle.Bold);
-
             this.main.Run();
         }
 
@@ -60,12 +60,15 @@ namespace C2MP
 
         private void Log(string message, Color color)
         {
-            this.rtbLog.SuspendLayout();
-            this.rtbLog.SelectionColor = color;
-            this.rtbLog.SelectionFont = this.boldFont;
-            this.rtbLog.AppendText($">> {message}{Environment.NewLine}");
-            this.rtbLog.ScrollToCaret();
-            this.rtbLog.ResumeLayout();
+            this.rtbLog.Invoke(() =>
+            {
+                this.rtbLog.SuspendLayout();
+                this.rtbLog.SelectionColor = color;
+                this.rtbLog.SelectionFont = this.boldFont;
+                this.rtbLog.AppendText($">> {message}{Environment.NewLine}");
+                this.rtbLog.ScrollToCaret();
+                this.rtbLog.ResumeLayout();
+            });
         }
 
         private void txtChatCommands_KeyDown(object sender, KeyEventArgs e)

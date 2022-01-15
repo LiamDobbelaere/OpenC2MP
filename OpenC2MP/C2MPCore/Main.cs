@@ -16,12 +16,10 @@ namespace C2MP.Core
 
     public class Main
     {
-        public const string version = "0.1 alpha";
+        public static string version = "0.1 alpha";
 
+        public LoggingModule loggingModule = new LoggingModule();
         public Dictionary<string, Action> chatCommands;
-
-        public delegate void LogMessageEventHandler(object sender, string message, LogMessageKind kind = LogMessageKind.INFO);
-        public event LogMessageEventHandler LogMessage = delegate { };
 
         public Main()
         {
@@ -33,7 +31,9 @@ namespace C2MP.Core
 
         public void Run()
         {
-            LogMessage.Invoke(this, $"Welcome to C2MP {version}!");
+            Thread thread = new Thread(() => new ServerSetupThread(loggingModule).Run());
+            //thread.Name = "ServerSetupThread";
+            thread.Start();
         }
 
         private void Exit()
