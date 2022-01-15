@@ -50,8 +50,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rtbLog = new System.Windows.Forms.RichTextBox();
+            this.txtChatCommands = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -91,6 +91,7 @@
             groupBox1.Controls.Add(this.flowLayoutPanel2);
             groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             groupBox1.Location = new System.Drawing.Point(8, 8);
             groupBox1.Margin = new System.Windows.Forms.Padding(8);
             groupBox1.Name = "groupBox1";
@@ -131,7 +132,10 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.comboBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(7, 22);
             this.comboBox2.Name = "comboBox2";
@@ -169,7 +173,10 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.comboBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(7, 22);
             this.comboBox1.Name = "comboBox1";
@@ -279,6 +286,9 @@
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.numericUpDown2.Location = new System.Drawing.Point(96, 4);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(0);
             this.numericUpDown2.Name = "numericUpDown2";
@@ -313,6 +323,9 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.numericUpDown1.Location = new System.Drawing.Point(96, 4);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(0);
             this.numericUpDown1.Name = "numericUpDown1";
@@ -351,8 +364,8 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.richTextBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.rtbLog, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtChatCommands, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(190, 0);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -363,26 +376,31 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(455, 423);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
-            // richTextBox1
+            // rtbLog
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.White;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(455, 391);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.rtbLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.rtbLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbLog.Location = new System.Drawing.Point(8, 8);
+            this.rtbLog.Margin = new System.Windows.Forms.Padding(8);
+            this.rtbLog.Name = "rtbLog";
+            this.rtbLog.ReadOnly = true;
+            this.rtbLog.Size = new System.Drawing.Size(439, 375);
+            this.rtbLog.TabIndex = 1;
+            this.rtbLog.Text = "";
             // 
-            // textBox1
+            // txtChatCommands
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 391);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(455, 23);
-            this.textBox1.TabIndex = 2;
+            this.txtChatCommands.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.txtChatCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtChatCommands.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChatCommands.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.txtChatCommands.Location = new System.Drawing.Point(0, 391);
+            this.txtChatCommands.Margin = new System.Windows.Forms.Padding(0);
+            this.txtChatCommands.Name = "txtChatCommands";
+            this.txtChatCommands.Size = new System.Drawing.Size(455, 23);
+            this.txtChatCommands.TabIndex = 2;
+            this.txtChatCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatCommands_KeyDown);
             // 
             // tableLayoutPanel3
             // 
@@ -405,7 +423,10 @@
             // 
             // checkedListBox1
             // 
+            this.checkedListBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
@@ -439,8 +460,8 @@
             // button1
             // 
             this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(8, 146);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
@@ -452,6 +473,8 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox4.Location = new System.Drawing.Point(8, 119);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.checkBox4.Name = "checkBox4";
@@ -490,23 +513,29 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.comboBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(0, 18);
             this.comboBox3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(144, 23);
+            this.comboBox3.Size = new System.Drawing.Size(173, 23);
             this.comboBox3.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(835, 423);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.Name = "MainForm";
+            this.Opacity = 0.98D;
             this.Text = "C2MP";
             this.Load += new System.EventHandler(this.MainForm_Load);
             groupBox1.ResumeLayout(false);
@@ -555,9 +584,9 @@
         private FlowLayoutPanel flowLayoutPanel5;
         private CheckBox checkBox2;
         private TableLayoutPanel tableLayoutPanel1;
-        private RichTextBox richTextBox1;
+        private RichTextBox rtbLog;
         private TableLayoutPanel tableLayoutPanel2;
-        private TextBox textBox1;
+        private TextBox txtChatCommands;
         private FlowLayoutPanel flowLayoutPanel8;
         private Label label4;
         private ComboBox comboBox2;
