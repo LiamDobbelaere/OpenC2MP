@@ -1,31 +1,25 @@
 ﻿using C2MP.Core;
-using System.Collections.Specialized;
+using C2MP.Core.Modules;
 
-namespace C2MP
-{
-    public partial class MainForm : Form
-    {
+namespace C2MP {
+    public partial class MainForm : Form {
         private Main main;
         private Font boldFont;
         private Color infoColor = Color.FromArgb(250, 250, 250);
-        private Color errorColor = Color.FromArgb(255, 255, 16, 16);
+        private Color errorColor = Color.FromArgb(255, 128, 128);
         private Color warnColor = Color.FromArgb(255, 255, 16);
         private Color inputColor = Color.FromArgb(16, 255, 255);
 
-        public MainForm()
-        {
+        public MainForm() {
             InitializeComponent();
         }
 
-        private void Main_LogMessage(object sender, string message, LogMessageKind kind = LogMessageKind.INFO)
-        {
+        private void Main_LogMessage(object sender, string message, LogMessageKind kind = LogMessageKind.INFO) {
             Log(message, LogMessageKindToColor(kind));
         }
 
-        private Color LogMessageKindToColor(LogMessageKind kind)
-        {
-            switch (kind)
-            {
+        private Color LogMessageKindToColor(LogMessageKind kind) {
+            switch (kind) {
                 case LogMessageKind.INFO:
                     return infoColor;
                 case LogMessageKind.ERROR:
@@ -34,15 +28,15 @@ namespace C2MP
                     return warnColor;
                 case LogMessageKind.INPUT:
                     return inputColor;
+                case LogMessageKind.FATAL:
+                    return errorColor;
                 default:
                     return Color.Cyan;
             }
         }
 
-        private void Log(string message, Color color)
-        {
-            this.rtbLog.Invoke(() =>
-            {
+        private void Log(string message, Color color) {
+            this.rtbLog.Invoke(() => {
                 this.rtbLog.SuspendLayout();
                 this.rtbLog.SelectionColor = color;
                 this.rtbLog.SelectionFont = this.boldFont;
@@ -52,12 +46,9 @@ namespace C2MP
             });
         }
 
-        private void txtChatCommands_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (txtChatCommands.Text.StartsWith("/"))
-                {
+        private void txtChatCommands_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                if (txtChatCommands.Text.StartsWith("/")) {
                     main.ExecuteCommand(txtChatCommands.Text);
                 }
 
@@ -67,8 +58,7 @@ namespace C2MP
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
+        private void MainForm_Load(object sender, EventArgs e) {
             this.boldFont = new Font(this.rtbLog.Font, FontStyle.Bold);
 
             this.main = new Main();
@@ -76,8 +66,7 @@ namespace C2MP
             this.main.Run();
 
             AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
-            foreach (string chatCommandKey in this.main.chatCommands.Keys)
-            {
+            foreach (string chatCommandKey in this.main.chatCommands.Keys) {
                 chatCommands.Add($"/{chatCommandKey}");
             }
 
@@ -86,8 +75,7 @@ namespace C2MP
             txtChatCommands.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             this.main.Shutdown();
         }
     }

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C2MP.Core.Modules
-{
-    public class C2MPConfig
-    {
+﻿namespace C2MP.Core.Modules {
+    public class C2MPConfig {
         // The values that are set here are the default values
         public string nickname = "BuzzLightweight";
         public string gamePath = "C:\\Games\\Carmageddon II";
@@ -19,17 +11,22 @@ namespace C2MP.Core.Modules
         public string gameVersion = "USH";
         public string glideWrapperPath = "C:\\GlideWrapper";
         public short recoveryKey = 64;
+
+        public string GetDataFile(string filename) {
+            return Path.Combine(gamePath, filename);
+        }
+
+        public string GetExecutable() {
+            return Path.Combine(gamePath, "CARMA2_HW.exe");
+        }
     }
 
-    public class ConfigModule
-    {
-        public string ConfigFileLocation
-        {
+    public class ConfigModule {
+        public string ConfigFileLocation {
             get { return configFileLocation; }
         }
 
-        public C2MPConfig Config
-        {
+        public C2MPConfig Config {
             get { return config; }
         }
 
@@ -39,18 +36,15 @@ namespace C2MP.Core.Modules
         private C2MPConfig config = new C2MPConfig();
         private LoggingModule loggingModule;
 
-        public ConfigModule(LoggingModule loggingModule)
-        {
+        public ConfigModule(LoggingModule loggingModule) {
             this.loggingModule = loggingModule;
 
             LoadConfig();
         }
 
-        private void LoadConfig()
-        {
+        private void LoadConfig() {
 
-            if (!File.Exists(configFileLocation))
-            {
+            if (!File.Exists(configFileLocation)) {
                 loggingModule.Log($"Config file {configFileName} did not exist, creating..", LogMessageKind.WARN);
 
                 WriteConfig();
@@ -60,17 +54,14 @@ namespace C2MP.Core.Modules
             List<string> seenConfigOptions = new List<string>();
 
             int currentLine = 0;
-            foreach (string configOption in configOptions)
-            {
+            foreach (string configOption in configOptions) {
                 currentLine++;
 
                 int spaceIndex = configOption.IndexOf('=');
 
-                if (spaceIndex == -1)
-                {
-                    if (configOption.Trim() != String.Empty)
-                    {
-                        loggingModule.Log($"Unknown config setting at line {currentLine} in {configFileName}, ignoring..", 
+                if (spaceIndex == -1) {
+                    if (configOption.Trim() != String.Empty) {
+                        loggingModule.Log($"Unknown config setting at line {currentLine} in {configFileName}, ignoring..",
                             LogMessageKind.WARN);
                     }
 
@@ -80,21 +71,25 @@ namespace C2MP.Core.Modules
                 string configKey = configOption.Substring(0, spaceIndex).Trim().ToLower();
                 string configValue = configOption.Substring(configOption.IndexOf('=') + 1).Trim();
 
-                if (seenConfigOptions.Contains(configKey))
-                {
+                if (seenConfigOptions.Contains(configKey)) {
                     loggingModule.Log($"The key {configKey} appears more than once in {configFileName}! This is probably unintentional.",
                         LogMessageKind.WARN);
                 }
 
                 // TODO: deal with missing keys
 
-                switch (configKey)
-                {
+                switch (configKey) {
                     case "nickname":
                         config.nickname = configValue;
                         break;
                     case "gamepath":
                         config.gamePath = configValue;
+
+                        if (!File.Exists(config.GetExecutable())) {
+                            loggingModule.Log($"The game executable was not found at {config.GetExecutable()}! Please fix the configuration and try again.",
+                                LogMessageKind.FATAL);
+                            return;
+                        }
                         break;
                     case "masterserveraddress":
                         config.masterServerAddress = configValue;
@@ -123,8 +118,7 @@ namespace C2MP.Core.Modules
             }
         }
 
-        private void WriteConfig()
-        {
+        private void WriteConfig() {
             StreamWriter stream = File.CreateText(configFileLocation);
             stream.WriteLine($"nickname={config.nickname}");
             stream.WriteLine($"gamePath={config.gamePath}");
