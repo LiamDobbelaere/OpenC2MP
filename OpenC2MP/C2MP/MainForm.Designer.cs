@@ -537,6 +537,7 @@
             this.Name = "MainForm";
             this.Opacity = 0.98D;
             this.Text = "C2MP";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

@@ -3,12 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2MP", "C2MP\C2MP.csproj", "{C79C0692-A552-49D1-9402-9812958E6767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C2MP", "C2MP\C2MP.csproj", "{C79C0692-A552-49D1-9402-9812958E6767}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F6042AB9-BBB7-4348-999F-15CDE76AA880} = {F6042AB9-BBB7-4348-999F-15CDE76AA880}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2MP.Core", "C2MPCore\C2MP.Core.csproj", "{F6042AB9-BBB7-4348-999F-15CDE76AA880}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C2MP.Core", "C2MPCore\C2MP.Core.csproj", "{F6042AB9-BBB7-4348-999F-15CDE76AA880}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{954656FD-3061-41CF-BBC3-2C45E650DCFF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
