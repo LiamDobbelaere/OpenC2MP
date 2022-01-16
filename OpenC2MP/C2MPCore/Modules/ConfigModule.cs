@@ -77,7 +77,7 @@ namespace C2MP.Core.Modules
                     continue;
                 }
 
-                string configKey = configOption.Substring(0, spaceIndex).Trim();
+                string configKey = configOption.Substring(0, spaceIndex).Trim().ToLower();
                 string configValue = configOption.Substring(configOption.IndexOf('=') + 1).Trim();
 
                 if (seenConfigOptions.Contains(configKey))
@@ -86,30 +86,32 @@ namespace C2MP.Core.Modules
                         LogMessageKind.WARN);
                 }
 
+                // TODO: deal with missing keys
+
                 switch (configKey)
                 {
                     case "nickname":
                         config.nickname = configValue;
                         break;
-                    case "gamePath":
+                    case "gamepath":
                         config.gamePath = configValue;
                         break;
-                    case "masterServerAddress":
+                    case "masterserveraddress":
                         config.masterServerAddress = configValue;
                         break;
-                    case "usingMod":
+                    case "usingmod":
                         config.usingMod = Convert.ToBoolean(Convert.ToInt32(configValue));
                         break;
-                    case "modName":
+                    case "modname":
                         config.modName = configValue;
                         break;
-                    case "gameVersion":
+                    case "gameversion":
                         config.gameVersion = configValue;
                         break;
-                    case "glideWrapperPath":
+                    case "glidewrapperpath":
                         config.glideWrapperPath = configValue;
                         break;
-                    case "recoveryKey":
+                    case "recoverykey":
                         config.recoveryKey = Convert.ToInt16(configValue);
                         break;
                     default:

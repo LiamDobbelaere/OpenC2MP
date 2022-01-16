@@ -491,8 +491,8 @@
             this.flowLayoutPanel10.Controls.Add(this.comboBox3);
             this.flowLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 70);
-            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 78);
+            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
             this.flowLayoutPanel10.Size = new System.Drawing.Size(173, 41);
             this.flowLayoutPanel10.TabIndex = 12;
