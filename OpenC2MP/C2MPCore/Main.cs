@@ -11,19 +11,19 @@ namespace C2MP.Core {
         // Modules
         public LoggingModule loggingModule;
         public ConfigModule configModule;
+        public EventModule eventModule;
 
         public C2MPOptions options;
 
         public Dictionary<string, Action> chatCommands;
 
-        private Thread serverSetupThread;
-
         public Main() {
             loggingModule = new LoggingModule();
+            eventModule = new EventModule();
 
             // don't use the constructor for initializing stuff,
             // we want the GUI to be able to hook up their events first
-            // hence why only the logging module is instantiated, so we can hook up its events
+            // hence why only the logging and event module are instantiated, so we can hook up their events
         }
 
         private void Initialize() {
@@ -32,6 +32,7 @@ namespace C2MP.Core {
             };
 
             loggingModule.LogMessage += LoggingModule_LogMessage;
+            eventModule.PerformFirstTimeSetup += EventModule_PerformFirstTimeSetup;
             configModule = new ConfigModule(loggingModule);
 
 
@@ -42,7 +43,15 @@ namespace C2MP.Core {
             };
         }
 
-        private void LoggingModule_LogMessage(object sender, string message, LogMessageKind kind = LogMessageKind.INFO) {
+        private void EventModule_PerformFirstTimeSetup(object? sender, EventArgs e) {
+            Thread performFirstTimeSetupThread = 
+                new Thread(() => new PerformFirstTimeSetupThread(
+                    loggingModule.Of("PerformFirstTimeSetupThread"), configModule, options).Run());
+            performFirstTimeSetupThread.Name = "PerformFirstTimeSetupThread";
+            performFirstTimeSetupThread.Start();
+        }
+
+        private void LoggingModule_LogMessage(object sender, string message, string prefix, LogMessageKind kind = LogMessageKind.INFO) {
             if (kind == LogMessageKind.FATAL) {
                 Shutdown();
             }
@@ -55,7 +64,9 @@ namespace C2MP.Core {
         public void Run() {
             Initialize();
 
-            serverSetupThread = new Thread(() => new ServerSetupThread(loggingModule, configModule, options).Run());
+            Thread serverSetupThread = 
+                new Thread(() => new ServerSetupThread(
+                    loggingModule.Of("ServerSetupThread"), configModule, eventModule, options).Run());
             serverSetupThread.Name = "ServerSetupThread";
             serverSetupThread.Start();
         }

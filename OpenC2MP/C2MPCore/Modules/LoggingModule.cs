@@ -8,11 +8,32 @@
     }
 
     public class LoggingModule {
-        public delegate void LogMessageEventHandler(object sender, string message, LogMessageKind kind = LogMessageKind.INFO);
+        private string prefix = String.Empty;
+
+        public delegate void LogMessageEventHandler(object sender, string message, string prefix = "", LogMessageKind kind = LogMessageKind.INFO);
         public event LogMessageEventHandler LogMessage = delegate { };
 
         public void Log(string message, LogMessageKind kind = LogMessageKind.INFO) {
-            LogMessage.Invoke(this, message, kind);
+            LogMessage.Invoke(this, message, prefix, kind);
+        }
+
+        public void Log(string message, string prefixOverload, LogMessageKind kind = LogMessageKind.INFO) {
+            LogMessage.Invoke(this, message, prefixOverload, kind);
+        }
+
+        public LoggingModule Of(string prefix) {
+            LoggingModule copyWithPrefix = new LoggingModule();
+
+            #if DEBUG
+                copyWithPrefix.prefix = prefix;
+            #endif
+            copyWithPrefix.LogMessage += CopyWithPrefix_LogMessage;
+            
+            return copyWithPrefix;
+        }
+
+        private void CopyWithPrefix_LogMessage(object sender, string message, string prefix, LogMessageKind kind = LogMessageKind.INFO) {
+            Log(message, prefix, kind);
         }
     }
 }

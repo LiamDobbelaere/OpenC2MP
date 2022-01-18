@@ -9,13 +9,14 @@ namespace C2MP {
         private Color errorColor = Color.FromArgb(255, 128, 128);
         private Color warnColor = Color.FromArgb(255, 255, 16);
         private Color inputColor = Color.FromArgb(16, 255, 255);
+        private Color prefixColor = Color.FromArgb(64, 64, 64);
 
         public MainForm() {
             InitializeComponent();
         }
 
-        private void Main_LogMessage(object sender, string message, LogMessageKind kind = LogMessageKind.INFO) {
-            Log(message, LogMessageKindToColor(kind));
+        private void Main_LogMessage(object sender, string message, string prefix, LogMessageKind kind = LogMessageKind.INFO) {
+            Log(message, prefix, LogMessageKindToColor(kind));
         }
 
         private Color LogMessageKindToColor(LogMessageKind kind) {
@@ -35,13 +36,24 @@ namespace C2MP {
             }
         }
 
-        private void Log(string message, Color color) {
+        private void Log(string message, string prefix, Color color) {
             this.rtbLog.Invoke(() => {
                 this.rtbLog.SuspendLayout();
                 this.rtbLog.SelectionColor = color;
                 this.rtbLog.SelectionFont = this.boldFont;
-                this.rtbLog.AppendText($">> {message}{Environment.NewLine}");
+                this.rtbLog.AppendText($">> {message}");
                 this.rtbLog.ScrollToCaret();
+
+                if (prefix.Length > 0) {
+                    this.rtbLog.SuspendLayout();
+                    this.rtbLog.SelectionColor = prefixColor;
+                    this.rtbLog.SelectionFont = this.boldFont;
+                    this.rtbLog.AppendText($"\t\t\t\t{prefix} {Environment.NewLine}");
+                    this.rtbLog.ScrollToCaret();
+                } else {
+                    this.rtbLog.AppendText(Environment.NewLine);
+                }
+
                 this.rtbLog.ResumeLayout();
             });
         }

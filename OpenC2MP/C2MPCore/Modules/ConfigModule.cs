@@ -13,7 +13,22 @@
         public short recoveryKey = 64;
 
         public string GetDataFile(string filename) {
-            return Path.Combine(gamePath, filename);
+            return Path.Combine(gamePath, "DATA", filename);
+        }
+
+        public string GetBackupFile(string filename) {
+            string c2mpDataDir = Path.Combine(gamePath, "C2MP_DATA");
+            string c2mpDataBackupDir = Path.Combine(c2mpDataDir, "BACKUP");
+
+            if (!Directory.Exists(c2mpDataDir)) {
+                Directory.CreateDirectory(c2mpDataDir);
+            }
+
+            if (!Directory.Exists(c2mpDataBackupDir)) {
+                Directory.CreateDirectory(c2mpDataBackupDir);
+            }
+
+            return Path.Combine(c2mpDataBackupDir, filename);
         }
 
         public string GetExecutable() {
