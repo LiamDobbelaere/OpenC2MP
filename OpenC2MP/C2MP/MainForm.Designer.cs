@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.GroupBox groupBox1;
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
@@ -61,6 +62,7 @@
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.tmrShow = new System.Windows.Forms.Timer(this.components);
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
@@ -524,6 +526,11 @@
             this.comboBox3.Size = new System.Drawing.Size(173, 23);
             this.comboBox3.TabIndex = 2;
             // 
+            // tmrShow
+            // 
+            this.tmrShow.Interval = 1000;
+            this.tmrShow.Tick += new System.EventHandler(this.tmrShow_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -535,10 +542,11 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.Name = "MainForm";
-            this.Opacity = 0.98D;
+            this.Opacity = 0D;
             this.Text = "C2MP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             this.flowLayoutPanel8.ResumeLayout(false);
@@ -603,5 +611,6 @@
         private ComboBox comboBox3;
         private CheckBox checkBox4;
         private Button button1;
+        private System.Windows.Forms.Timer tmrShow;
     }
 }

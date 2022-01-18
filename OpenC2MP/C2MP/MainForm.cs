@@ -11,8 +11,13 @@ namespace C2MP {
         private Color inputColor = Color.FromArgb(16, 255, 255);
         private Color prefixColor = Color.FromArgb(64, 64, 64);
 
+        private double formOpacity = 0.98;
+
         public MainForm() {
             InitializeComponent();
+#if DEBUG
+            this.Opacity = formOpacity;
+#endif
         }
 
         private void Main_LogMessage(object sender, string message, string prefix, LogMessageKind kind = LogMessageKind.INFO) {
@@ -89,6 +94,17 @@ namespace C2MP {
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             this.main.Shutdown();
+        }
+
+        private void tmrShow_Tick(object sender, EventArgs e) {
+            this.Opacity = formOpacity;
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e) {
+#if !DEBUG
+            new SplashScreen().Show();
+            this.tmrShow.Start();
+#endif
         }
     }
 }
