@@ -35,6 +35,26 @@
             return Path.Combine(c2mpDataBackupDir, filename);
         }
 
+        public string GetCarBackupFile(string filename) {
+            string c2mpDataDir = Path.Combine(gamePath, "C2MP_DATA");
+            string c2mpDataBackupDir = Path.Combine(c2mpDataDir, "BACKUP");
+            string c2mpDataTwtFilesDir = Path.Combine(c2mpDataBackupDir, "TWT_FILES");
+
+            if (!Directory.Exists(c2mpDataDir)) {
+                Directory.CreateDirectory(c2mpDataDir);
+            }
+
+            if (!Directory.Exists(c2mpDataBackupDir)) {
+                Directory.CreateDirectory(c2mpDataBackupDir);
+            }
+
+            if (!Directory.Exists(c2mpDataTwtFilesDir)) {
+                Directory.CreateDirectory(c2mpDataTwtFilesDir);
+            }
+
+            return Path.Combine(c2mpDataTwtFilesDir, filename);
+        }
+
         public string GetExecutable() {
             return Path.Combine(gamePath, "CARMA2_HW.exe");
         }

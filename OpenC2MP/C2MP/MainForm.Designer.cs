@@ -64,6 +64,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.tmrShow = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStaticLog = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
@@ -81,6 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel9.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -99,7 +104,7 @@
             groupBox1.Margin = new System.Windows.Forms.Padding(8);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(8);
-            groupBox1.Size = new System.Drawing.Size(174, 407);
+            groupBox1.Size = new System.Drawing.Size(174, 428);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Game Settings";
@@ -356,11 +361,11 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(819, 423);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1030, 444);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -376,7 +381,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(439, 423);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(650, 444);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // rtbLog
@@ -388,7 +393,7 @@
             this.rtbLog.Margin = new System.Windows.Forms.Padding(8);
             this.rtbLog.Name = "rtbLog";
             this.rtbLog.ReadOnly = true;
-            this.rtbLog.Size = new System.Drawing.Size(423, 375);
+            this.rtbLog.Size = new System.Drawing.Size(634, 396);
             this.rtbLog.TabIndex = 1;
             this.rtbLog.Text = "";
             // 
@@ -398,10 +403,10 @@
             this.txtChatCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtChatCommands.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtChatCommands.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.txtChatCommands.Location = new System.Drawing.Point(0, 391);
+            this.txtChatCommands.Location = new System.Drawing.Point(0, 412);
             this.txtChatCommands.Margin = new System.Windows.Forms.Padding(0);
             this.txtChatCommands.Name = "txtChatCommands";
-            this.txtChatCommands.Size = new System.Drawing.Size(439, 23);
+            this.txtChatCommands.Size = new System.Drawing.Size(650, 23);
             this.txtChatCommands.TabIndex = 2;
             this.txtChatCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatCommands_KeyDown);
             // 
@@ -413,7 +418,7 @@
             this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel9, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(629, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(840, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
@@ -421,7 +426,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(190, 423);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(190, 444);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // checkedListBox1
@@ -457,7 +462,7 @@
             this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
             this.flowLayoutPanel9.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(190, 195);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(190, 216);
             this.flowLayoutPanel9.TabIndex = 2;
             // 
             // button1
@@ -465,7 +470,7 @@
             this.button1.AutoSize = true;
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(8, 146);
+            this.button1.Location = new System.Drawing.Point(8, 167);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 41);
@@ -478,7 +483,7 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Location = new System.Drawing.Point(8, 119);
+            this.checkBox4.Location = new System.Drawing.Point(8, 140);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(86, 19);
@@ -493,7 +498,7 @@
             this.flowLayoutPanel10.Controls.Add(this.label5);
             this.flowLayoutPanel10.Controls.Add(this.comboBox3);
             this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 67);
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 88);
             this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
             this.flowLayoutPanel10.Size = new System.Drawing.Size(173, 44);
@@ -530,14 +535,50 @@
             this.tmrShow.Interval = 1000;
             this.tmrShow.Tick += new System.EventHandler(this.tmrShow_Tick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AllowMerge = false;
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(25)))));
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStaticLog});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 450);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1036, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStaticLog
+            // 
+            this.lblStaticLog.Name = "lblStaticLog";
+            this.lblStaticLog.Size = new System.Drawing.Size(0, 17);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.statusStrip1, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1036, 472);
+            this.tableLayoutPanel4.TabIndex = 6;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(819, 423);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1036, 472);
+            this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.flowLayoutPanel1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -572,6 +613,9 @@
             this.flowLayoutPanel9.PerformLayout();
             this.flowLayoutPanel10.ResumeLayout(false);
             this.flowLayoutPanel10.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,5 +656,8 @@
         private CheckBox checkBox4;
         private Button button1;
         private System.Windows.Forms.Timer tmrShow;
+        private StatusStrip statusStrip1;
+        private TableLayoutPanel tableLayoutPanel4;
+        private ToolStripStatusLabel lblStaticLog;
     }
 }

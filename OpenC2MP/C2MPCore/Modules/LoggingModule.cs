@@ -4,7 +4,8 @@
         WARN, // warning
         ERROR, // something went wrong, but execution can attempt to continue
         INPUT, // user input
-        FATAL // unresolvable error
+        FATAL, // unresolvable error
+        STATIC, // generic, but shown in the same place (like a status bar)
     }
 
     public class LoggingModule {

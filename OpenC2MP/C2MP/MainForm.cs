@@ -21,7 +21,11 @@ namespace C2MP {
         }
 
         private void Main_LogMessage(object sender, string message, string prefix, LogMessageKind kind = LogMessageKind.INFO) {
-            Log(message, prefix, LogMessageKindToColor(kind));
+            if (kind == LogMessageKind.STATIC) {
+                lblStaticLog.Text = message;
+            } else {
+                Log(message, prefix, LogMessageKindToColor(kind));
+            }
         }
 
         private Color LogMessageKindToColor(LogMessageKind kind) {

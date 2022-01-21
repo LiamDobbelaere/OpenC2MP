@@ -28,6 +28,12 @@ namespace C2MP.Core {
                 return;
             }
 
+            if (!PatchCrushData()) {
+                return;
+            }
+
+            loggingModule.Log($"First time setup complete!", LogMessageKind.INFO);
+
             // TODO: there's more to first time setup that I haven't written yet
         }
 
@@ -98,7 +104,9 @@ namespace C2MP.Core {
             return true;
         }
 
-        private bool UpdateCrushData() {
+        private bool PatchCrushData() {
+            loggingModule.Log("Patching crush data..", LogMessageKind.INFO);
+
             string carsFolder = configModule.Config.GetDataDirectory("CARS");
 
             if (!Directory.Exists(carsFolder)) {
@@ -109,12 +117,15 @@ namespace C2MP.Core {
             bool foundFlapDetach = false;
             int carFileBytesLost = 0;
 
-
             // Honestly this is pretty cryptic, so I haven't refactored it much from C2O's code
             string[] carFiles = Directory.GetFiles(carsFolder);
-            List<byte> outputBytes = new List<byte>();
+            int carFileN = 0;
             foreach (string carFile in carFiles) {
-                // TODO: backup car twt first!
+                List<byte> outputBytes = new List<byte>();
+
+                carFileN++;
+
+                File.Copy(carFile, configModule.Config.GetCarBackupFile(Path.GetFileName(carFile)), true);
 
                 byte[] carFileBytes = File.ReadAllBytes(carFile);
 
@@ -162,7 +173,14 @@ namespace C2MP.Core {
                 }
 
                 File.WriteAllBytes(carFile, outputBytes.ToArray());
+
+                float percentage = MathF.Round((carFileN / (float)carFiles.Length) * 100.0f);
+
+                loggingModule.Log($"Patching car crush data ({Path.GetFileName(carFile)}) {percentage}%..", LogMessageKind.STATIC);
             }
+
+            loggingModule.Log("", LogMessageKind.STATIC);
+
             return true;
         }
     }
