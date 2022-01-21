@@ -97,5 +97,73 @@ namespace C2MP.Core {
 
             return true;
         }
+
+        private bool UpdateCrushData() {
+            string carsFolder = configModule.Config.GetDataDirectory("CARS");
+
+            if (!Directory.Exists(carsFolder)) {
+                loggingModule.Log($"Could not find {carsFolder}, cannot complete first time setup.", LogMessageKind.FATAL);
+                return false;
+            }
+
+            bool foundFlapDetach = false;
+            int carFileBytesLost = 0;
+
+
+            // Honestly this is pretty cryptic, so I haven't refactored it much from C2O's code
+            string[] carFiles = Directory.GetFiles(carsFolder);
+            List<byte> outputBytes = new List<byte>();
+            foreach (string carFile in carFiles) {
+                // TODO: backup car twt first!
+
+                byte[] carFileBytes = File.ReadAllBytes(carFile);
+
+                for (int i = 0; i < carFileBytes.Length; i++) {
+                    if (carFileBytes.Length - i >= 7 && i >= 3) {
+                        if (foundFlapDetach) {
+                            if (carFileBytes.MatchesTextASCII(i, "box")) {
+                                carFileBytesLost += 2;
+
+                                for (int j = 0; j < carFileBytesLost; j++) {
+                                    outputBytes.Add(32); // space
+                                }
+
+                                i += 2;
+
+                                foundFlapDetach = false;
+
+                                carFileBytesLost = 0;
+                            } else {
+                                carFileBytesLost++;
+                            }
+                        } else if (!carFileBytes.MatchesOneOfASCII(i - 1, "/- ") && carFileBytes.MatchesTextASCII(i, "flap")) {
+                            foundFlapDetach = true;
+
+                            outputBytes.AddRange(Encoding.ASCII.GetBytes("boring"));
+
+                            carFileBytesLost -= 2;
+
+                            i += 2;
+                        } else if (!carFileBytes.MatchesOneOfASCII(i - 1, "/- ")
+                            && carFileBytes.MatchesTextASCII(i, "detach")
+                            && !carFileBytes.MatchesOneOfASCII(i + 6, "?")) {
+
+                            foundFlapDetach = true;
+
+                            outputBytes.AddRange(Encoding.ASCII.GetBytes("boring"));
+
+                            i += 4;
+                        } else {
+                            outputBytes.Add(carFileBytes[i]);
+                        }
+                    } else {
+                        outputBytes.Add(carFileBytes[i]);
+                    }
+                }
+
+                File.WriteAllBytes(carFile, outputBytes.ToArray());
+            }
+            return true;
+        }
     }
 }

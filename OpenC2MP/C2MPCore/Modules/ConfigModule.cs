@@ -16,6 +16,10 @@
             return Path.Combine(gamePath, "DATA", filename);
         }
 
+        public string GetDataDirectory(string directoryName) {
+            return Path.Combine(gamePath, "DATA", directoryName);
+        }
+
         public string GetBackupFile(string filename) {
             string c2mpDataDir = Path.Combine(gamePath, "C2MP_DATA");
             string c2mpDataBackupDir = Path.Combine(c2mpDataDir, "BACKUP");
