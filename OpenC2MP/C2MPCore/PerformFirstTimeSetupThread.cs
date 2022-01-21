@@ -23,7 +23,11 @@ namespace C2MP.Core {
             if (!EnableEagleOpponents()) {
                 return;
             }
-            
+
+            if (!DisableTimePerPedKillAndRecoveryCost()) {
+                return;
+            }
+
             // TODO: there's more to first time setup that I haven't written yet
         }
 
@@ -57,6 +61,39 @@ namespace C2MP.Core {
 
             string tempOpponentPath = configModule.Config.GetDataFile("TEMP_OPPONENT.TXT");
             File.WriteAllLines(tempOpponentPath, opponentData);
+
+            return true;
+        }
+
+        private bool DisableTimePerPedKillAndRecoveryCost() {
+            loggingModule.Log($"Disable time per ped kill and recovery cost..", LogMessageKind.INFO);
+
+            string generalPath = configModule.Config.GetDataFile("GENERAL.TXT");
+
+            if (!File.Exists(generalPath)) {
+                loggingModule.Log($"Could not find {generalPath}, cannot complete first time setup.", LogMessageKind.FATAL);
+                return false;
+            }
+
+            List<string> generalData = new List<string>();
+            string[] generalFileLines = File.ReadAllLines(generalPath);
+            foreach (string line in generalFileLines) {
+                if (line.EndsWith("// Recovery cost for each skill level")) {
+                    generalData.Add("1,1,1\t\t\t\t\t// Recovery cost for each skill level");
+                    continue;
+                }
+
+                if (line.EndsWith("// Time per ped kill for each skill level")) {
+                    generalData.Add("0,0,0\t\t\t\t\t// Time per ped kill for each skill level");
+                    continue;
+                }
+
+                generalData.Add(line);
+            }
+
+            File.Move(generalPath, configModule.Config.GetBackupFile("GENERAL.TXT"), true);
+
+            File.WriteAllLines(generalPath, generalData);
 
             return true;
         }
