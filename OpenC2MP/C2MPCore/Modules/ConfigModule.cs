@@ -20,6 +20,10 @@
             return Path.Combine(gamePath, "DATA", directoryName);
         }
 
+        public string GetCarWAM(string carName) {
+            return Path.Join(GetDataDirectory("CARS"), carName, $"{carName}.WAM");
+        }
+
         public string GetBackupFile(string filename) {
             string c2mpDataDir = Path.Combine(gamePath, "C2MP_DATA");
             string c2mpDataBackupDir = Path.Combine(c2mpDataDir, "BACKUP");
@@ -53,6 +57,26 @@
             }
 
             return Path.Combine(c2mpDataTwtFilesDir, filename);
+        }
+
+        public string GetWAMBackupFile(string filename) {
+            string c2mpDataDir = Path.Combine(gamePath, "C2MP_DATA");
+            string c2mpDataBackupDir = Path.Combine(c2mpDataDir, "BACKUP");
+            string c2mpDataWAMFilesDir = Path.Combine(c2mpDataBackupDir, "WAM_FILES");
+
+            if (!Directory.Exists(c2mpDataDir)) {
+                Directory.CreateDirectory(c2mpDataDir);
+            }
+
+            if (!Directory.Exists(c2mpDataBackupDir)) {
+                Directory.CreateDirectory(c2mpDataBackupDir);
+            }
+
+            if (!Directory.Exists(c2mpDataWAMFilesDir)) {
+                Directory.CreateDirectory(c2mpDataWAMFilesDir);
+            }
+
+            return Path.Combine(c2mpDataWAMFilesDir, filename);
         }
 
         public string GetExecutable() {

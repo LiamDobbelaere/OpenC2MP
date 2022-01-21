@@ -117,6 +117,45 @@ namespace C2MP.Core {
             bool foundFlapDetach = false;
             int carFileBytesLost = 0;
 
+            // ** Car directories **
+            string[] carDirectories = Directory.GetDirectories(carsFolder);
+            foreach (string carDirectory in carDirectories) {
+                List<string> outputWAM = new List<string>();
+
+                if (carDirectory.EndsWith("32x20x8") || carDirectory.EndsWith("64x48x8")) {
+                    continue;
+                }
+
+                string carName = Path.GetFileName(carDirectory);
+                loggingModule.Log($"Car directories are currently not supported! Use TWT instead. ({carName})", LogMessageKind.ERROR);
+                continue;
+
+                string wamPath = configModule.Config.GetCarWAM(carName);
+                string[] wamLines = File.ReadAllLines(wamPath);
+                for (int i = 0; i < wamLines.Length; i++) {
+                    string wamLine = wamLines[i];
+                    
+                    if (wamLine.StartsWith("flap") || wamLine.StartsWith("detach")) {
+                        outputWAM.Add("boring        // CRUSH TYPE (FLAP, DETACH, FULLY_DETACH, JOINT_INDEX)");
+
+                        while (!wamLines[++i].StartsWith("box"));
+
+                        outputWAM.Add(wamLines[++i]);
+
+                        continue;
+                    }
+
+                    outputWAM.Add(wamLine);
+                }
+
+                File.Move(wamPath, configModule.Config.GetWAMBackupFile(Path.GetFileName(wamPath)), true);
+
+                File.WriteAllLines(wamPath, outputWAM);
+
+                loggingModule.Log($"Patching car crush data ({Path.GetFileName(wamPath)})..", LogMessageKind.STATIC);
+            }
+
+            // ** TWT files **
             // Honestly this is pretty cryptic, so I haven't refactored it much from C2O's code
             string[] carFiles = Directory.GetFiles(carsFolder);
             int carFileN = 0;
@@ -125,9 +164,8 @@ namespace C2MP.Core {
 
                 carFileN++;
 
-                File.Copy(carFile, configModule.Config.GetCarBackupFile(Path.GetFileName(carFile)), true);
-
                 byte[] carFileBytes = File.ReadAllBytes(carFile);
+                File.Move(carFile, configModule.Config.GetCarBackupFile(Path.GetFileName(carFile)), true);
 
                 for (int i = 0; i < carFileBytes.Length; i++) {
                     if (carFileBytes.Length - i >= 7 && i >= 3) {
