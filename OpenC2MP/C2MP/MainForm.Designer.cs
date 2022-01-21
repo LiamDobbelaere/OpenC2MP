@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.GroupBox groupBox1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -359,7 +360,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 423);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(819, 423);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -375,7 +376,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(455, 423);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(439, 423);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // rtbLog
@@ -387,7 +388,7 @@
             this.rtbLog.Margin = new System.Windows.Forms.Padding(8);
             this.rtbLog.Name = "rtbLog";
             this.rtbLog.ReadOnly = true;
-            this.rtbLog.Size = new System.Drawing.Size(439, 375);
+            this.rtbLog.Size = new System.Drawing.Size(423, 375);
             this.rtbLog.TabIndex = 1;
             this.rtbLog.Text = "";
             // 
@@ -400,7 +401,7 @@
             this.txtChatCommands.Location = new System.Drawing.Point(0, 391);
             this.txtChatCommands.Margin = new System.Windows.Forms.Padding(0);
             this.txtChatCommands.Name = "txtChatCommands";
-            this.txtChatCommands.Size = new System.Drawing.Size(455, 23);
+            this.txtChatCommands.Size = new System.Drawing.Size(439, 23);
             this.txtChatCommands.TabIndex = 2;
             this.txtChatCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatCommands_KeyDown);
             // 
@@ -412,7 +413,7 @@
             this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel9, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(645, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(629, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
@@ -491,12 +492,11 @@
             this.flowLayoutPanel10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel10.Controls.Add(this.label5);
             this.flowLayoutPanel10.Controls.Add(this.comboBox3);
-            this.flowLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 78);
-            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 67);
+            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
-            this.flowLayoutPanel10.Size = new System.Drawing.Size(173, 41);
+            this.flowLayoutPanel10.Size = new System.Drawing.Size(173, 44);
             this.flowLayoutPanel10.TabIndex = 12;
             this.flowLayoutPanel10.WrapContents = false;
             // 
@@ -520,10 +520,9 @@
             this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(0, 18);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.comboBox3.Location = new System.Drawing.Point(3, 18);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(173, 23);
+            this.comboBox3.Size = new System.Drawing.Size(167, 23);
             this.comboBox3.TabIndex = 2;
             // 
             // tmrShow
@@ -537,10 +536,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(835, 423);
+            this.ClientSize = new System.Drawing.Size(819, 423);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Opacity = 0D;
             this.Text = "C2MP";

@@ -38,13 +38,18 @@ namespace C2MP.Core {
 
             this.chatCommands = new Dictionary<string, Action>()
             {
+                { "forcefirsttimesetup", () => this.DoFirstTimeSetup() },
                 { "configlocation", () => this.loggingModule.Log(this.configModule.ConfigFileLocation) },
                 { "exit", this.Exit }
             };
         }
 
         private void EventModule_PerformFirstTimeSetup(object? sender, EventArgs e) {
-            Thread performFirstTimeSetupThread = 
+            DoFirstTimeSetup();
+        }
+
+        private void DoFirstTimeSetup() {
+            Thread performFirstTimeSetupThread =
                 new Thread(() => new PerformFirstTimeSetupThread(
                     loggingModule.Of("PerformFirstTimeSetupThread"), configModule, options).Run());
             performFirstTimeSetupThread.Name = "PerformFirstTimeSetupThread";
