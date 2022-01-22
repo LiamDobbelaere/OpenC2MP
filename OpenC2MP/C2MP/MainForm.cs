@@ -1,5 +1,6 @@
 ﻿using C2MP.Core;
 using C2MP.Core.Modules;
+using C2MP.Core.Modules.GameData;
 
 namespace C2MP {
     public partial class MainForm : Form {
@@ -84,6 +85,7 @@ namespace C2MP {
 
             this.main = new Main();
             this.main.loggingModule.LogMessage += Main_LogMessage;
+            this.main.eventModule.CarRecordBuilt += EventModule_CarRecordBuilt;
             this.main.Run();
 
             AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
@@ -94,6 +96,26 @@ namespace C2MP {
             txtChatCommands.AutoCompleteCustomSource = chatCommands;
             txtChatCommands.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtChatCommands.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private class CarComboBoxItem {
+            public Car Value { get; set; }
+
+            public override string ToString() {
+                return $"{Value.carName.ToTitleCase()} ({Value.longDriverName.ToTitleCase()})";
+            }
+        }
+
+        private void EventModule_CarRecordBuilt(object? sender, EventArgs e) {
+            this.cboCars.Invoke(() => {
+                this.cboCars.Items.Clear();
+
+                foreach (Car car in main.gameDataModule.CarRecord) {
+                    this.cboCars.Items.Add(new CarComboBoxItem {
+                        Value = car
+                    });
+                }
+            });
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {

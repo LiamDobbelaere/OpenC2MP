@@ -1,4 +1,5 @@
 ﻿using C2MP.Core.Modules;
+using C2MP.Core.Modules.GameData;
 
 namespace C2MP.Core {
     public class C2MPOptions {
@@ -12,6 +13,7 @@ namespace C2MP.Core {
         public LoggingModule loggingModule;
         public ConfigModule configModule;
         public EventModule eventModule;
+        public GameDataModule gameDataModule;
 
         public C2MPOptions options;
 
@@ -33,8 +35,10 @@ namespace C2MP.Core {
 
             loggingModule.LogMessage += LoggingModule_LogMessage;
             eventModule.PerformFirstTimeSetup += EventModule_PerformFirstTimeSetup;
-            configModule = new ConfigModule(loggingModule);
+            eventModule.BuildCarRecord += EventModule_BuildCarRecord;
 
+            configModule = new ConfigModule(loggingModule);
+            gameDataModule = new GameDataModule(configModule, loggingModule.Of("GameDataModule"), eventModule);
 
             this.chatCommands = new Dictionary<string, Action>()
             {
@@ -42,6 +46,10 @@ namespace C2MP.Core {
                 { "configlocation", () => this.loggingModule.Log(this.configModule.ConfigFileLocation) },
                 { "exit", this.Exit }
             };
+        }
+
+        private void EventModule_BuildCarRecord(object? sender, EventArgs e) {
+            gameDataModule.BuildCarRecord();
         }
 
         private void EventModule_PerformFirstTimeSetup(object? sender, EventArgs e) {
@@ -68,6 +76,11 @@ namespace C2MP.Core {
 
         public void Run() {
             Initialize();
+
+            if (!options.isC2MPRunning) {
+                // Something went wrong that caused an early abort, don't continue
+                return;
+            }
 
             Thread serverSetupThread = 
                 new Thread(() => new ServerSetupThread(

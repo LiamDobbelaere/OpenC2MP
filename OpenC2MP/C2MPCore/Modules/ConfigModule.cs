@@ -3,6 +3,7 @@
         // The values that are set here are the default values
         public string nickname = "BuzzLightweight";
         public string gamePath = "C:\\Games\\Carmageddon II";
+        public string executableName = "CARMA2_HW_C2MP.EXE";
         public string masterServerAddress = "http://c2mp.liam.host";
 
         // c2o compat. not totally sure if these will be used yet
@@ -80,7 +81,7 @@
         }
 
         public string GetExecutable() {
-            return Path.Combine(gamePath, "CARMA2_HW.exe");
+            return Path.Combine(gamePath, executableName);
         }
     }
 
@@ -123,7 +124,7 @@
                 int spaceIndex = configOption.IndexOf('=');
 
                 if (spaceIndex == -1) {
-                    if (configOption.Trim() != String.Empty) {
+                    if (configOption.Trim() != String.Empty && !configOption.StartsWith("//")) {
                         loggingModule.Log($"Unknown config setting at line {currentLine} in {configFileName}, ignoring..",
                             LogMessageKind.WARN);
                     }
@@ -154,6 +155,9 @@
                             return;
                         }
                         break;
+                    case "executablename":
+                        config.executableName = configValue;
+                        break;
                     case "masterserveraddress":
                         config.masterServerAddress = configValue;
                         break;
@@ -183,8 +187,10 @@
 
         private void WriteConfig() {
             StreamWriter stream = File.CreateText(configFileLocation);
+            stream.WriteLine("// Don't change the order of these keys, only their values");
             stream.WriteLine($"nickname={config.nickname}");
             stream.WriteLine($"gamePath={config.gamePath}");
+            stream.WriteLine($"executableName={config.executableName}");
             stream.WriteLine($"masterServerAddress={config.masterServerAddress}");
             stream.WriteLine($"usingMod={Convert.ToInt32(config.usingMod)}");
             stream.WriteLine($"modName={config.modName}");

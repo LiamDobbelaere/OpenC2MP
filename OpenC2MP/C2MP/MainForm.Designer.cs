@@ -62,7 +62,7 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cboCars = new System.Windows.Forms.ComboBox();
             this.tmrShow = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStaticLog = new System.Windows.Forms.ToolStripStatusLabel();
@@ -496,7 +496,7 @@
             this.flowLayoutPanel10.AutoSize = true;
             this.flowLayoutPanel10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel10.Controls.Add(this.label5);
-            this.flowLayoutPanel10.Controls.Add(this.comboBox3);
+            this.flowLayoutPanel10.Controls.Add(this.cboCars);
             this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 88);
             this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
@@ -518,17 +518,17 @@
             this.label5.Text = "Car";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBox3
+            // cboCars
             // 
-            this.comboBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
-            this.comboBox3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(3, 18);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(167, 23);
-            this.comboBox3.TabIndex = 2;
+            this.cboCars.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.cboCars.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cboCars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboCars.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.cboCars.FormattingEnabled = true;
+            this.cboCars.Location = new System.Drawing.Point(3, 18);
+            this.cboCars.Name = "cboCars";
+            this.cboCars.Size = new System.Drawing.Size(167, 23);
+            this.cboCars.TabIndex = 2;
             // 
             // tmrShow
             // 
@@ -652,7 +652,7 @@
         private FlowLayoutPanel flowLayoutPanel9;
         private FlowLayoutPanel flowLayoutPanel10;
         private Label label5;
-        private ComboBox comboBox3;
+        private ComboBox cboCars;
         private CheckBox checkBox4;
         private Button button1;
         private System.Windows.Forms.Timer tmrShow;

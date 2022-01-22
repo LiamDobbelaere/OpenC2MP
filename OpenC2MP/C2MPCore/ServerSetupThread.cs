@@ -21,10 +21,26 @@ namespace C2MP.Core {
                 eventModule.RaisePerformFirstTimeSetup(this);
             }
 
-            /*while (options.isC2MPRunning)
-            {
+            // TODO: spectator mode (delayed, low-priority)
 
-            }*/
+            // TODO: set graphics wrapper (delayed, medium-priority)
+
+            // TODO: mode record + listbox (delayed, low-priority)
+
+            // TODO: car record + listbox
+            eventModule.RaiseBuildCarRecord(this);
+
+            // TODO: track record + listbox
+
+            // TODO: set ip address
+
+            // TODO: advertise to master server
+
+            // TODO: spawn server listener thread
+
+            // TODO: game manipulator disable drones
+
+            // TODO: spawn game listener thread
         }
     }
 }

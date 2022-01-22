@@ -29,5 +29,9 @@ namespace C2MP.Core {
 
             return false;
         }
+
+        public static string EraseComment(this string configLine) {
+            return configLine.Split('/')[0].Trim();
+        }
     }
 }
