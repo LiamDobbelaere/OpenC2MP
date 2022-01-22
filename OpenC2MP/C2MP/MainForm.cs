@@ -1,6 +1,10 @@
 ﻿using C2MP.Core;
 using C2MP.Core.Modules;
 using C2MP.Core.Modules.GameData;
+using ToxicRagers.Stainless.Formats;
+using ToxicRagers.Carmageddon2.Formats;
+using Car = C2MP.Core.Modules.GameData.Car;
+using ToxicRagers.Carmageddon.Formats;
 
 namespace C2MP {
     public partial class MainForm : Form {
@@ -131,6 +135,61 @@ namespace C2MP {
             new SplashScreen().Show();
             this.tmrShow.Start();
 #endif
+        }
+
+        private void cboCars_SelectedIndexChanged(object sender, EventArgs e) {
+            CarComboBoxItem item = (CarComboBoxItem) cboCars.SelectedItem;
+
+            if (item != null) {
+                try {
+                    pbxCarImage.Image = GetCarImage(item.Value);
+                } catch {
+
+                }
+            }
+        }
+
+        private Bitmap GetCarImage(Car car) {
+            // Haha, this is a mess, holy shit
+
+            string simpleCarName = car.fileName.Split('.')[0].ToLower();
+            string carTWTLocation = Path.Join(main.configModule.Config.GetDataDirectory("INTRFACE"), "CarImage", $"{simpleCarName}CI.TWT");
+
+            TWT carImageTWT = TWT.Load(carTWTLocation);
+            TWTEntry pixiesEntry = carImageTWT.Contents.Find((entry) => entry.Name.EndsWith(".P16"));
+
+            // think there's a bug in toxicRagers that makes pixies have a missing first byte ._.
+            byte[] correctedPixies = new byte[pixiesEntry.Data.Length + 1];
+            Array.Copy(pixiesEntry.Data, 0, correctedPixies, 1, pixiesEntry.Data.Length);
+
+            Stream pixiesStream = new MemoryStream(correctedPixies);
+            PIX pData = PIX.Load(pixiesStream);
+            Bitmap result = new Bitmap(64 * 3, 64 * 3);
+            Graphics g = Graphics.FromImage(result);
+
+            string[] validCarPicNames = new string[] {
+                simpleCarName + "a",
+                simpleCarName + "b",
+                simpleCarName + "c",
+                simpleCarName + "d",
+                simpleCarName + "e",
+                simpleCarName + "f"
+            };
+            List<PIXIE> filteredPixies = pData.Pixies.FindAll((pixie) => validCarPicNames.Contains(pixie.Name.Split('.')[0]));
+            filteredPixies.Sort((a, b) => a.Name.CompareTo(b.Name));
+
+            int currentPixieIndex = 0;
+            for (int y = 0; y < 2; y++) {
+                for (int x = 0; x < 3; x++) {
+                    PIXIE pixie = filteredPixies[currentPixieIndex];
+
+                    g.DrawImage(pixie.GetBitmap(), x * 64, y * 64);
+
+                    currentPixieIndex++;
+                }
+            }
+            
+            return result;
         }
     }
 }

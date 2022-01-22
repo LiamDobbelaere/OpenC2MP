@@ -14,6 +14,5 @@ namespace C2MP.Core.Modules.GameData {
         public int strengthRating;
         public int costToBuy;
         public int numCrushPointers;
-
     }
 }

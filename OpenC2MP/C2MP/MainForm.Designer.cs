@@ -56,7 +56,7 @@
             this.txtChatCommands = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbxCarImage = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -81,7 +81,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxCarImage)).BeginInit();
             this.flowLayoutPanel9.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -415,7 +415,7 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.checkedListBox1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.pbxCarImage, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel9, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(840, 0);
@@ -423,9 +423,8 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 128F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(190, 444);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
@@ -441,15 +440,16 @@
             this.checkedListBox1.Size = new System.Drawing.Size(184, 122);
             this.checkedListBox1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pbxCarImage
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 128);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(190, 100);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pbxCarImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxCarImage.Location = new System.Drawing.Point(0, 128);
+            this.pbxCarImage.Margin = new System.Windows.Forms.Padding(0);
+            this.pbxCarImage.Name = "pbxCarImage";
+            this.pbxCarImage.Size = new System.Drawing.Size(190, 175);
+            this.pbxCarImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxCarImage.TabIndex = 1;
+            this.pbxCarImage.TabStop = false;
             // 
             // flowLayoutPanel9
             // 
@@ -458,11 +458,11 @@
             this.flowLayoutPanel9.Controls.Add(this.flowLayoutPanel10);
             this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel9.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(0, 228);
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(0, 303);
             this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
             this.flowLayoutPanel9.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(190, 216);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(190, 141);
             this.flowLayoutPanel9.TabIndex = 2;
             // 
             // button1
@@ -470,7 +470,7 @@
             this.button1.AutoSize = true;
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(8, 167);
+            this.button1.Location = new System.Drawing.Point(8, 92);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 41);
@@ -483,7 +483,7 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Location = new System.Drawing.Point(8, 140);
+            this.checkBox4.Location = new System.Drawing.Point(8, 65);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(86, 19);
@@ -498,7 +498,7 @@
             this.flowLayoutPanel10.Controls.Add(this.label5);
             this.flowLayoutPanel10.Controls.Add(this.cboCars);
             this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 88);
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(8, 13);
             this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
             this.flowLayoutPanel10.Size = new System.Drawing.Size(173, 44);
@@ -525,10 +525,12 @@
             this.cboCars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboCars.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.cboCars.FormattingEnabled = true;
+            this.cboCars.ItemHeight = 15;
             this.cboCars.Location = new System.Drawing.Point(3, 18);
             this.cboCars.Name = "cboCars";
             this.cboCars.Size = new System.Drawing.Size(167, 23);
             this.cboCars.TabIndex = 2;
+            this.cboCars.SelectedIndexChanged += new System.EventHandler(this.cboCars_SelectedIndexChanged);
             // 
             // tmrShow
             // 
@@ -608,7 +610,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxCarImage)).EndInit();
             this.flowLayoutPanel9.ResumeLayout(false);
             this.flowLayoutPanel9.PerformLayout();
             this.flowLayoutPanel10.ResumeLayout(false);
@@ -648,7 +650,7 @@
         private ComboBox comboBox1;
         private TableLayoutPanel tableLayoutPanel3;
         private CheckedListBox checkedListBox1;
-        private PictureBox pictureBox1;
+        private PictureBox pbxCarImage;
         private FlowLayoutPanel flowLayoutPanel9;
         private FlowLayoutPanel flowLayoutPanel10;
         private Label label5;

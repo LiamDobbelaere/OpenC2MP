@@ -42,6 +42,7 @@ namespace C2MP.Core.Modules.GameData {
                 newCar.carName = opponentLines[++i].Trim();
                 newCar.strengthRating = int.Parse(opponentLines[++i].EraseComment());
                 newCar.costToBuy = int.Parse(opponentLines[++i].EraseComment());
+                i++; // 'availability' key, skipped
                 newCar.fileName = opponentLines[++i].EraseComment();
                     
                 // Skip the vehicle description comment
