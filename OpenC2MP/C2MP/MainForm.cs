@@ -119,6 +119,8 @@ namespace C2MP {
                         Value = car
                     });
                 }
+
+                this.cboCars.SelectedIndex = 0;
             });
         }
 
@@ -144,7 +146,7 @@ namespace C2MP {
                 try {
                     pbxCarImage.Image = GetCarImage(item.Value);
                 } catch {
-
+                    pbxCarImage.Image = null;
                 }
             }
         }
