@@ -1,10 +1,7 @@
 ﻿using C2MP.Core;
 using C2MP.Core.Modules;
 using C2MP.Core.Modules.GameData;
-using ToxicRagers.Stainless.Formats;
-using ToxicRagers.Carmageddon2.Formats;
-using Car = C2MP.Core.Modules.GameData.Car;
-using ToxicRagers.Carmageddon.Formats;
+using C2MP.ToxicRagers;
 
 namespace C2MP {
     public partial class MainForm : Form {
@@ -90,6 +87,7 @@ namespace C2MP {
             this.main = new Main();
             this.main.loggingModule.LogMessage += Main_LogMessage;
             this.main.eventModule.CarRecordBuilt += EventModule_CarRecordBuilt;
+            this.main.eventModule.TrackRecordBuilt += EventModule_TrackRecordBuilt;
             this.main.Run();
 
             AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
@@ -100,6 +98,27 @@ namespace C2MP {
             txtChatCommands.AutoCompleteCustomSource = chatCommands;
             txtChatCommands.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtChatCommands.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+        private class TrackComboBoxItem {
+            public Track Value { get; set; }
+
+            public override string ToString() {
+                return $"{Value.fileName}";
+            }
+        }
+
+        private void EventModule_TrackRecordBuilt(object? sender, EventArgs e) {
+            this.cboTracks.Invoke(() => {
+                this.cboTracks.Items.Clear();
+
+                foreach (Track track in main.gameDataModule.TrackRecord) {
+                    this.cboTracks.Items.Add(new TrackComboBoxItem {
+                        Value = track
+                    });
+                }
+
+                this.cboTracks.SelectedIndex = 0;
+            });
         }
 
         private class CarComboBoxItem {
@@ -143,11 +162,11 @@ namespace C2MP {
             CarComboBoxItem item = (CarComboBoxItem) cboCars.SelectedItem;
 
             if (item != null) {
-                try {
+                //try {
                     pbxCarImage.Image = GetCarImage(item.Value);
-                } catch {
-                    pbxCarImage.Image = null;
-                }
+                //} catch {
+                //    pbxCarImage.Image = null;
+                //}
             }
         }
 
@@ -160,11 +179,7 @@ namespace C2MP {
             TWT carImageTWT = TWT.Load(carTWTLocation);
             TWTEntry pixiesEntry = carImageTWT.Contents.Find((entry) => entry.Name.EndsWith(".P16"));
 
-            // think there's a bug in toxicRagers that makes pixies have a missing first byte ._.
-            byte[] correctedPixies = new byte[pixiesEntry.Data.Length + 1];
-            Array.Copy(pixiesEntry.Data, 0, correctedPixies, 1, pixiesEntry.Data.Length);
-
-            Stream pixiesStream = new MemoryStream(correctedPixies);
+            Stream pixiesStream = new MemoryStream(pixiesEntry.Data);
             PIX pData = PIX.Load(pixiesStream);
             Bitmap result = new Bitmap(64 * 3, 64 * 3);
             Graphics g = Graphics.FromImage(result);
@@ -177,7 +192,7 @@ namespace C2MP {
                 simpleCarName + "e",
                 simpleCarName + "f"
             };
-            List<PIXIE> filteredPixies = pData.Pixies.FindAll((pixie) => validCarPicNames.Contains(pixie.Name.Split('.')[0]));
+            List<PIXIE> filteredPixies = pData.Pixies.FindAll((pixie) => validCarPicNames.Contains(pixie.Name.Split('.')[0].ToLower()));
             filteredPixies.Sort((a, b) => a.Name.CompareTo(b.Name));
 
             int currentPixieIndex = 0;
@@ -192,6 +207,37 @@ namespace C2MP {
             }
             
             return result;
+        }
+
+        private Bitmap GetTrackImage(Track track) {
+            // Haha, this is also a mess, holy shit
+
+            string trackTWTLocation = Path.Join(main.configModule.Config.GetDataDirectory("RACES"), $"{track.fileName}.TWT");
+
+            TWT trackTWT = TWT.Load(trackTWTLocation);
+            TWTEntry pixiesEntry = trackTWT.Contents.Find((entry) => entry.Name.EndsWith(".P16"));
+
+            Stream pixiesStream = new MemoryStream(pixiesEntry.Data);
+            PIX pData = PIX.Load(pixiesStream);
+            PIXIE trackMap = pData.Pixies.Find((pixie) => pixie.Name.ToLower().Contains("map"));
+            if (trackMap == null) {
+                return null;
+            }
+
+            return trackMap.GetBitmap();
+        }
+
+        private void cboTracks_SelectedIndexChanged(object sender, EventArgs e) {
+            TrackComboBoxItem item = (TrackComboBoxItem)cboTracks.SelectedItem;
+
+            if (item != null) {
+                try {
+                    pbxTrackImage.Image = GetTrackImage(item.Value);
+                } catch {
+                    //main.loggingModule.Log(ex.Message, LogMessageKind.ERROR);
+                    pbxTrackImage.Image = null;
+                }
+            }
         }
     }
 }

@@ -36,7 +36,8 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboTracks = new System.Windows.Forms.ComboBox();
+            this.pbxTrackImage = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
@@ -71,6 +72,7 @@
             groupBox1.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTrackImage)).BeginInit();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
@@ -117,7 +119,7 @@
             this.flowLayoutPanel8.Controls.Add(this.comboBox2);
             this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel8.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(8, 237);
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(8, 359);
             this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(8);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Padding = new System.Windows.Forms.Padding(4);
@@ -155,14 +157,15 @@
             this.flowLayoutPanel7.AutoSize = true;
             this.flowLayoutPanel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel7.Controls.Add(this.label3);
-            this.flowLayoutPanel7.Controls.Add(this.comboBox1);
+            this.flowLayoutPanel7.Controls.Add(this.cboTracks);
+            this.flowLayoutPanel7.Controls.Add(this.pbxTrackImage);
             this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel7.Location = new System.Drawing.Point(8, 185);
             this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(8);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
             this.flowLayoutPanel7.Padding = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(158, 52);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(158, 174);
             this.flowLayoutPanel7.TabIndex = 10;
             this.flowLayoutPanel7.WrapContents = false;
             // 
@@ -179,17 +182,27 @@
             this.label3.Text = "Track";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBox1
+            // cboTracks
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 22);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(144, 23);
-            this.comboBox1.TabIndex = 2;
+            this.cboTracks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.cboTracks.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cboTracks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboTracks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.cboTracks.FormattingEnabled = true;
+            this.cboTracks.Location = new System.Drawing.Point(7, 22);
+            this.cboTracks.Name = "cboTracks";
+            this.cboTracks.Size = new System.Drawing.Size(144, 23);
+            this.cboTracks.TabIndex = 2;
+            this.cboTracks.SelectedIndexChanged += new System.EventHandler(this.cboTracks_SelectedIndexChanged);
+            // 
+            // pbxTrackImage
+            // 
+            this.pbxTrackImage.Location = new System.Drawing.Point(7, 51);
+            this.pbxTrackImage.Name = "pbxTrackImage";
+            this.pbxTrackImage.Size = new System.Drawing.Size(144, 116);
+            this.pbxTrackImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxTrackImage.TabIndex = 3;
+            this.pbxTrackImage.TabStop = false;
             // 
             // flowLayoutPanel6
             // 
@@ -596,6 +609,7 @@
             this.flowLayoutPanel8.PerformLayout();
             this.flowLayoutPanel7.ResumeLayout(false);
             this.flowLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTrackImage)).EndInit();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
@@ -647,7 +661,7 @@
         private ComboBox comboBox2;
         private FlowLayoutPanel flowLayoutPanel7;
         private Label label3;
-        private ComboBox comboBox1;
+        private ComboBox cboTracks;
         private TableLayoutPanel tableLayoutPanel3;
         private CheckedListBox checkedListBox1;
         private PictureBox pbxCarImage;
@@ -661,5 +675,6 @@
         private StatusStrip statusStrip1;
         private TableLayoutPanel tableLayoutPanel4;
         private ToolStripStatusLabel lblStaticLog;
+        private PictureBox pbxTrackImage;
     }
 }

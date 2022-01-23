@@ -90,7 +90,7 @@ namespace C2MP {
                 hOldBitmap = SelectObject(memDc, hBitmap);
 
                 // Set parameters for layered window update.
-                Size newSize = new Size(bitmap.Width, bitmap.Height);
+                SizeT newSize = new SizeT(bitmap.Width, bitmap.Height);
                 Point sourceLocation = new Point(0, 0);
                 Point newLocation = new Point(this.Left, this.Top);
                 BLENDFUNCTION blend = new BLENDFUNCTION();
@@ -139,11 +139,11 @@ namespace C2MP {
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct Size {
+        struct SizeT {
             public Int32 cx;
             public Int32 cy;
 
-            public Size(Int32 cx, Int32 cy) { this.cx = cx; this.cy = cy; }
+            public SizeT(Int32 cx, Int32 cy) { this.cx = cx; this.cy = cy; }
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -165,7 +165,7 @@ namespace C2MP {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool UpdateLayeredWindow(IntPtr hwnd, IntPtr hdcDst,
-            ref Point pptDst, ref Size psize, IntPtr hdcSrc, ref Point pprSrc,
+            ref Point pptDst, ref SizeT psize, IntPtr hdcSrc, ref Point pprSrc,
             Int32 crKey, ref BLENDFUNCTION pblend, Int32 dwFlags);
 
         [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
