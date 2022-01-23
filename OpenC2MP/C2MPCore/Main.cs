@@ -1,5 +1,6 @@
 ﻿using C2MP.Core.Modules;
 using C2MP.Core.Modules.GameData;
+using C2MP.Core.Threads;
 
 namespace C2MP.Core {
     public class C2MPOptions {
@@ -35,6 +36,7 @@ namespace C2MP.Core {
 
             loggingModule.LogMessage += LoggingModule_LogMessage;
             eventModule.PerformFirstTimeSetup += EventModule_PerformFirstTimeSetup;
+            eventModule.SpawnServerListener += EventModule_SpawnServerListener;
             eventModule.BuildCarRecord += EventModule_BuildCarRecord;
             eventModule.BuildTrackRecord += EventModule_BuildTrackRecord;
 
@@ -47,6 +49,14 @@ namespace C2MP.Core {
                 { "configlocation", () => this.loggingModule.Log(this.configModule.ConfigFileLocation) },
                 { "exit", this.Exit }
             };
+        }
+
+        private void EventModule_SpawnServerListener(object? sender, EventArgs e) {
+            Thread serverListenerThread =
+                new Thread(() => new ServerListenerThread(
+                    loggingModule.Of("ServerListenerThread"), configModule, eventModule, options).Run());
+            serverListenerThread.Name = "ServerListenerThread";
+            serverListenerThread.Start();
         }
 
         private void EventModule_BuildTrackRecord(object? sender, EventArgs e) {
@@ -77,6 +87,7 @@ namespace C2MP.Core {
 
         public void Shutdown() {
             options.isC2MPRunning = false;
+            eventModule.RaiseShutdownServerListener(this);
         }
 
         public void Run() {

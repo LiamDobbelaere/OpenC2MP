@@ -5,6 +5,7 @@
         public string gamePath = "C:\\Games\\Carmageddon II";
         public string executableName = "CARMA2_HW_C2MP.EXE";
         public string masterServerAddress = "http://c2mp.liam.host";
+        public int port = 1084;
 
         // c2o compat. not totally sure if these will be used yet
         public bool usingMod = false;
@@ -176,6 +177,9 @@
                     case "recoverykey":
                         config.recoveryKey = Convert.ToInt16(configValue);
                         break;
+                    case "port":
+                        config.port = Convert.ToInt16(configValue);
+                        break;
                     default:
                         loggingModule.Log($"Unknown key {configKey} in {configFileName}", LogMessageKind.WARN);
                         break;
@@ -183,6 +187,9 @@
 
                 seenConfigOptions.Add(configKey);
             }
+
+            // In the case of missing keys, we just set them to their defaults so we need to write that back to disk
+            WriteConfig();
         }
 
         private void WriteConfig() {
@@ -192,6 +199,7 @@
             stream.WriteLine($"gamePath={config.gamePath}");
             stream.WriteLine($"executableName={config.executableName}");
             stream.WriteLine($"masterServerAddress={config.masterServerAddress}");
+            stream.WriteLine($"port={config.port}");
             stream.WriteLine($"usingMod={Convert.ToInt32(config.usingMod)}");
             stream.WriteLine($"modName={config.modName}");
             stream.WriteLine($"gameVersion={config.gameVersion}");

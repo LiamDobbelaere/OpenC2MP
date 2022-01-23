@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C2MP.Core {
+namespace C2MP.Core.Threads {
     internal class PerformFirstTimeSetupThread {
         private LoggingModule loggingModule;
         private ConfigModule configModule;

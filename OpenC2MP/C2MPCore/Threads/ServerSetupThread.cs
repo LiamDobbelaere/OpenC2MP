@@ -1,6 +1,6 @@
 ﻿using C2MP.Core.Modules;
 
-namespace C2MP.Core {
+namespace C2MP.Core.Threads {
     internal class ServerSetupThread {
         private LoggingModule loggingModule;
         private ConfigModule configModule;
@@ -36,7 +36,7 @@ namespace C2MP.Core {
 
             // TODO: advertise to master server (delayed, low-priority)
 
-            // TODO: spawn server listener thread
+            eventModule.RaiseSpawnServerListener(this);
 
             // TODO: game manipulator disable drones
 

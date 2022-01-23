@@ -103,10 +103,10 @@
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             groupBox1.Location = new System.Drawing.Point(8, 8);
-            groupBox1.Margin = new System.Windows.Forms.Padding(8);
+            groupBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 7);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(8);
-            groupBox1.Size = new System.Drawing.Size(174, 428);
+            groupBox1.Size = new System.Drawing.Size(174, 429);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Game Settings";
@@ -413,11 +413,10 @@
             // txtChatCommands
             // 
             this.txtChatCommands.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
-            this.txtChatCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtChatCommands.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtChatCommands.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.txtChatCommands.Location = new System.Drawing.Point(0, 412);
-            this.txtChatCommands.Margin = new System.Windows.Forms.Padding(0);
+            this.txtChatCommands.Location = new System.Drawing.Point(0, 413);
+            this.txtChatCommands.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.txtChatCommands.Name = "txtChatCommands";
             this.txtChatCommands.Size = new System.Drawing.Size(650, 23);
             this.txtChatCommands.TabIndex = 2;

@@ -144,6 +144,7 @@ namespace C2MP {
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            this.main.loggingModule.LogMessage -= Main_LogMessage;
             this.main.Shutdown();
         }
 
@@ -162,11 +163,11 @@ namespace C2MP {
             CarComboBoxItem item = (CarComboBoxItem) cboCars.SelectedItem;
 
             if (item != null) {
-                //try {
+                try {
                     pbxCarImage.Image = GetCarImage(item.Value);
-                //} catch {
-                //    pbxCarImage.Image = null;
-                //}
+                } catch {
+                    pbxCarImage.Image = null;
+                }
             }
         }
 

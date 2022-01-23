@@ -20,5 +20,11 @@ namespace C2MP.Core.Modules {
 
         public event EventHandler TrackRecordBuilt = delegate { };
         internal void RaiseTrackRecordBuilt(object sender) => TrackRecordBuilt.Invoke(sender, EventArgs.Empty);
+
+        public event EventHandler SpawnServerListener = delegate { };
+        internal void RaiseSpawnServerListener(object sender) => SpawnServerListener.Invoke(sender, EventArgs.Empty);
+
+        public event EventHandler ShutdownServerListener = delegate { };
+        internal void RaiseShutdownServerListener(object sender) => ShutdownServerListener.Invoke(sender, EventArgs.Empty);
     }
 }
