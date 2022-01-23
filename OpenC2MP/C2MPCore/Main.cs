@@ -36,6 +36,7 @@ namespace C2MP.Core {
             loggingModule.LogMessage += LoggingModule_LogMessage;
             eventModule.PerformFirstTimeSetup += EventModule_PerformFirstTimeSetup;
             eventModule.BuildCarRecord += EventModule_BuildCarRecord;
+            eventModule.BuildTrackRecord += EventModule_BuildTrackRecord;
 
             configModule = new ConfigModule(loggingModule);
             gameDataModule = new GameDataModule(configModule, loggingModule.Of("GameDataModule"), eventModule);
@@ -46,6 +47,10 @@ namespace C2MP.Core {
                 { "configlocation", () => this.loggingModule.Log(this.configModule.ConfigFileLocation) },
                 { "exit", this.Exit }
             };
+        }
+
+        private void EventModule_BuildTrackRecord(object? sender, EventArgs e) {
+            gameDataModule.BuildTrackRecord();
         }
 
         private void EventModule_BuildCarRecord(object? sender, EventArgs e) {

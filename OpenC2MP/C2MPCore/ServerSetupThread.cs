@@ -16,6 +16,7 @@ namespace C2MP.Core {
 
         public void Run() {
             loggingModule.Log($"Welcome to C2MP {Main.version}!");
+            loggingModule.Log($"Setting up, please be patient..", LogMessageKind.WARN);
 
             if (!File.Exists(configModule.Config.GetDataFile("TEMP_OPPONENT.txt"))) {
                 eventModule.RaisePerformFirstTimeSetup(this);
@@ -27,20 +28,21 @@ namespace C2MP.Core {
 
             // TODO: mode record + listbox (delayed, low-priority)
 
-            // TODO: car record + listbox
             eventModule.RaiseBuildCarRecord(this);
 
-            // TODO: track record + listbox
+            eventModule.RaiseBuildTrackRecord(this);
 
-            // TODO: set ip address
+            // TODO: set ip address (-> determine importance)
 
-            // TODO: advertise to master server
+            // TODO: advertise to master server (delayed, low-priority)
 
             // TODO: spawn server listener thread
 
             // TODO: game manipulator disable drones
 
             // TODO: spawn game listener thread
+
+            loggingModule.Log($"Finished setting up!", LogMessageKind.INFO);
         }
     }
 }

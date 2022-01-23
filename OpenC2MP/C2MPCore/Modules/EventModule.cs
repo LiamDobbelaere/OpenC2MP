@@ -14,5 +14,11 @@ namespace C2MP.Core.Modules {
 
         public event EventHandler CarRecordBuilt = delegate { };
         internal void RaiseCarRecordBuilt(object sender) => CarRecordBuilt.Invoke(sender, EventArgs.Empty);
+
+        public event EventHandler BuildTrackRecord = delegate { };
+        internal void RaiseBuildTrackRecord(object sender) => BuildTrackRecord.Invoke(sender, EventArgs.Empty);
+
+        public event EventHandler TrackRecordBuilt = delegate { };
+        internal void RaiseTrackRecordBuilt(object sender) => TrackRecordBuilt.Invoke(sender, EventArgs.Empty);
     }
 }
