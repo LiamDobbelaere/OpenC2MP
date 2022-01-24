@@ -1,5 +1,6 @@
 ﻿using C2MP.Core.Modules;
 using C2MP.Core.Modules.GameData;
+using C2MP.Core.Modules.Multiplayer;
 using C2MP.Core.Threads;
 
 namespace C2MP.Core {
@@ -15,6 +16,7 @@ namespace C2MP.Core {
         public ConfigModule configModule;
         public EventModule eventModule;
         public GameDataModule gameDataModule;
+        public MultiplayerModule multiplayerModule;
 
         public C2MPOptions options;
 
@@ -41,8 +43,8 @@ namespace C2MP.Core {
             eventModule.BuildTrackRecord += EventModule_BuildTrackRecord;
 
             configModule = new ConfigModule(loggingModule);
+            multiplayerModule = new MultiplayerModule(configModule, loggingModule.Of("MultiplayerModule"), eventModule);
             gameDataModule = new GameDataModule(configModule, loggingModule.Of("GameDataModule"), eventModule);
-
             this.chatCommands = new Dictionary<string, Action>()
             {
                 { "forcefirsttimesetup", () => this.DoFirstTimeSetup() },
@@ -54,7 +56,7 @@ namespace C2MP.Core {
         private void EventModule_SpawnServerListener(object? sender, EventArgs e) {
             Thread serverListenerThread =
                 new Thread(() => new ServerListenerThread(
-                    loggingModule.Of("ServerListenerThread"), configModule, eventModule, options).Run());
+                    loggingModule.Of("ServerListenerThread"), configModule, eventModule, multiplayerModule, options).Run());
             serverListenerThread.Name = "ServerListenerThread";
             serverListenerThread.Start();
         }

@@ -1,4 +1,5 @@
 ﻿using C2MP.Core.Modules;
+using C2MP.Core.Modules.Multiplayer;
 using System.Net;
 using System.Net.Sockets;
 
@@ -8,17 +9,27 @@ namespace C2MP.Core.Threads {
         private ConfigModule configModule;
         private EventModule eventModule;
         private C2MPOptions options;
+        private MultiplayerModule multiplayerModule;
 
         private int totalConnections;
 
-        public ServerListenerThread(LoggingModule loggingModule, ConfigModule configModule, EventModule eventModule, C2MPOptions options) {
+        public ServerListenerThread(
+            LoggingModule loggingModule, 
+            ConfigModule configModule, 
+            EventModule eventModule, 
+            MultiplayerModule multiplayerModule, 
+            C2MPOptions options
+        ) {
             this.loggingModule = loggingModule;
             this.configModule = configModule;
             this.eventModule = eventModule;
+            this.multiplayerModule = multiplayerModule;
+
             this.options = options;
         }
 
         public void Run() {
+            Random random = new Random();
 
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, configModule.Config.port);
 
@@ -35,6 +46,8 @@ namespace C2MP.Core.Threads {
                 tcpSocket.Close();
             };
 
+            Socket udpClientSocket = null;
+
             // Allows this thread to be shutdown cleanly
             while (options.isC2MPRunning) {
                 try {
@@ -48,10 +61,30 @@ namespace C2MP.Core.Threads {
 
                     loggingModule.Log($"Incoming client, creating UDP client socket..", LogMessageKind.INFO);
 
-                    // TODO: ClientRecord stuff
-                    // TODO: make random-ish udp server, but always start with the configged port (see decomp. Java code)
+                    int udpPort = configModule.Config.port;
+                    while (!multiplayerModule.IsPortAvailable(udpPort)) {
+                        udpPort++;
+                    }
 
-                    // TODO: create Client
+                    // I don't know why C2O did this just yet
+                    if (udpClientSocket != null) {
+                        if (udpClientSocket.Connected && udpClientSocket.GetPort() == udpPort) {
+                            udpClientSocket.Close();
+                        }
+                    }
+
+                    udpClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+                    udpClientSocket.SendBufferSize = 4096;
+                    udpClientSocket.ReceiveBufferSize = 4096;
+
+                    loggingModule.Log($"Client UDP socket OK on port {udpClientSocket.GetPort()}..", LogMessageKind.INFO);
+
+                    multiplayerModule.AddClient(new Client {
+                        tcpClientSocket = tcpClientSocket,
+                        udpClientSocket = udpClientSocket,
+                        clientName = $"NewClient-{totalConnections}"
+                    });
                 } catch (SocketException ex) {
                     loggingModule.Log($"TCP server socket accept was interrupted, reason: {ex.Message}", LogMessageKind.ERROR);
                 }

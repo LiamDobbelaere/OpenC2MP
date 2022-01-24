@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +34,10 @@ namespace C2MP.Core {
 
         public static string EraseComment(this string configLine) {
             return configLine.Split('/')[0].Trim();
+        }
+
+        public static int GetPort(this Socket socket) {
+            return ((IPEndPoint)socket.LocalEndPoint).Port;
         }
     }
 }
