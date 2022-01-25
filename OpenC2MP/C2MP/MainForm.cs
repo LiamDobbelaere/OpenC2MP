@@ -4,7 +4,16 @@ using C2MP.Core.Modules.GameData;
 using C2MP.ToxicRagers;
 
 namespace C2MP {
+    public enum ChosenRole {
+        HOST,
+        JOIN
+    }
+
     public partial class MainForm : Form {
+        // TODO: use this to make C2MPCore's main() spawn ClientSetupThread instead of ServerSetupThread
+        public ChosenRole chosenRole = ChosenRole.HOST;
+        public HostJoinSelection hostJoinSelection;
+
         private Main main;
         private Font boldFont;
         private Color infoColor = Color.FromArgb(250, 250, 250);
@@ -49,6 +58,10 @@ namespace C2MP {
 
         private void Log(string message, string prefix, Color color) {
             this.rtbLog.Invoke(() => {
+                if (this.rtbLog == null || this.rtbLog.IsDisposed) {
+                    return;
+                }
+
                 this.rtbLog.SuspendLayout();
                 this.rtbLog.SelectionColor = color;
                 this.rtbLog.SelectionFont = this.boldFont;
@@ -81,24 +94,6 @@ namespace C2MP {
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e) {
-            this.boldFont = new Font(this.rtbLog.Font, FontStyle.Bold);
-
-            this.main = new Main();
-            this.main.loggingModule.LogMessage += Main_LogMessage;
-            this.main.eventModule.CarRecordBuilt += EventModule_CarRecordBuilt;
-            this.main.eventModule.TrackRecordBuilt += EventModule_TrackRecordBuilt;
-            this.main.Run();
-
-            AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
-            foreach (string chatCommandKey in this.main.chatCommands.Keys) {
-                chatCommands.Add($"/{chatCommandKey}");
-            }
-
-            txtChatCommands.AutoCompleteCustomSource = chatCommands;
-            txtChatCommands.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtChatCommands.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }
         private class TrackComboBoxItem {
             public Track Value { get; set; }
 
@@ -146,6 +141,10 @@ namespace C2MP {
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             this.main.loggingModule.LogMessage -= Main_LogMessage;
             this.main.Shutdown();
+            
+            if (this.hostJoinSelection != null) {
+                this.hostJoinSelection.Close();
+            }
         }
 
         private void tmrShow_Tick(object sender, EventArgs e) {
@@ -239,6 +238,25 @@ namespace C2MP {
                     pbxTrackImage.Image = null;
                 }
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e) {
+            this.boldFont = new Font(this.rtbLog.Font, FontStyle.Bold);
+
+            this.main = new Main();
+            this.main.loggingModule.LogMessage += Main_LogMessage;
+            this.main.eventModule.CarRecordBuilt += EventModule_CarRecordBuilt;
+            this.main.eventModule.TrackRecordBuilt += EventModule_TrackRecordBuilt;
+            this.main.Run();
+
+            AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
+            foreach (string chatCommandKey in this.main.chatCommands.Keys) {
+                chatCommands.Add($"/{chatCommandKey}");
+            }
+
+            txtChatCommands.AutoCompleteCustomSource = chatCommands;
+            txtChatCommands.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtChatCommands.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
     }
 }
