@@ -24,35 +24,46 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HostJoinSelection));
-            this.pbxHost = new System.Windows.Forms.PictureBox();
-            this.pbxJoin = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxHost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxJoin)).BeginInit();
+            this.btnHost = new System.Windows.Forms.Button();
+            this.txtIP = new System.Windows.Forms.TextBox();
+            this.btnJoin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // pbxHost
+            // btnHost
             // 
-            this.pbxHost.BackgroundImage = global::C2MP.Properties.Resources.host_button;
-            this.pbxHost.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbxHost.Location = new System.Drawing.Point(12, 12);
-            this.pbxHost.Name = "pbxHost";
-            this.pbxHost.Size = new System.Drawing.Size(469, 168);
-            this.pbxHost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbxHost.TabIndex = 1;
-            this.pbxHost.TabStop = false;
-            this.pbxHost.Click += new System.EventHandler(this.pbxHost_Click);
+            this.btnHost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnHost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnHost.Location = new System.Drawing.Point(12, 12);
+            this.btnHost.Name = "btnHost";
+            this.btnHost.Size = new System.Drawing.Size(238, 23);
+            this.btnHost.TabIndex = 0;
+            this.btnHost.Text = "Host";
+            this.btnHost.UseVisualStyleBackColor = false;
+            this.btnHost.Click += new System.EventHandler(this.btnHost_Click);
             // 
-            // pbxJoin
+            // txtIP
             // 
-            this.pbxJoin.BackgroundImage = global::C2MP.Properties.Resources.join_button;
-            this.pbxJoin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbxJoin.Location = new System.Drawing.Point(68, 186);
-            this.pbxJoin.Name = "pbxJoin";
-            this.pbxJoin.Size = new System.Drawing.Size(529, 168);
-            this.pbxJoin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbxJoin.TabIndex = 2;
-            this.pbxJoin.TabStop = false;
-            this.pbxJoin.Click += new System.EventHandler(this.pbxJoin_Click);
+            this.txtIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(25)))));
+            this.txtIP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.txtIP.Location = new System.Drawing.Point(12, 41);
+            this.txtIP.Name = "txtIP";
+            this.txtIP.Size = new System.Drawing.Size(164, 23);
+            this.txtIP.TabIndex = 1;
+            this.txtIP.Text = "127.0.0.1";
+            // 
+            // btnJoin
+            // 
+            this.btnJoin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnJoin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.btnJoin.Location = new System.Drawing.Point(182, 41);
+            this.btnJoin.Name = "btnJoin";
+            this.btnJoin.Size = new System.Drawing.Size(68, 23);
+            this.btnJoin.TabIndex = 2;
+            this.btnJoin.Text = "Join";
+            this.btnJoin.UseVisualStyleBackColor = false;
+            this.btnJoin.Click += new System.EventHandler(this.btnJoin_Click);
             // 
             // HostJoinSelection
             // 
@@ -60,22 +71,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(609, 363);
-            this.Controls.Add(this.pbxJoin);
-            this.Controls.Add(this.pbxHost);
+            this.ClientSize = new System.Drawing.Size(262, 80);
+            this.Controls.Add(this.btnJoin);
+            this.Controls.Add(this.txtIP);
+            this.Controls.Add(this.btnHost);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "HostJoinSelection";
             this.Text = "C2MP";
-            ((System.ComponentModel.ISupportInitialize)(this.pbxHost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxJoin)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private PictureBox pbxHost;
-        private PictureBox pbxJoin;
+
+        private Button btnHost;
+        private TextBox txtIP;
+        private Button btnJoin;
     }
 }

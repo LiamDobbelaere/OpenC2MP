@@ -33,6 +33,21 @@ namespace C2MP.Core.Threads {
 
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, configModule.Config.port);
 
+            // ****
+            // TODO: Sigh, use TcpListener and UdpClient instead of manually making sockets, silly
+            // ****
+
+
+
+
+
+
+
+
+
+
+
+
             Socket tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             tcpSocket.ReceiveBufferSize = 1024; // C2O does this and I don't know why yet
 
@@ -73,10 +88,15 @@ namespace C2MP.Core.Threads {
                         }
                     }
 
+                    IPEndPoint localUdpEndpoint = new IPEndPoint(IPAddress.Loopback, udpPort);
+
                     udpClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                     udpClientSocket.SendBufferSize = 4096;
                     udpClientSocket.ReceiveBufferSize = 4096;
+                    
+                    //tcpSocket.Bind(localUdpEndpoint);
+                    //tcpSocket.Connect();
 
                     loggingModule.Log($"Client UDP socket OK on port {udpClientSocket.GetPort()}..", LogMessageKind.INFO);
 

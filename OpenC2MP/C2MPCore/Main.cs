@@ -2,9 +2,12 @@
 using C2MP.Core.Modules.GameData;
 using C2MP.Core.Modules.Multiplayer;
 using C2MP.Core.Threads;
+using C2MP.Core.Threads.Clientside;
 
 namespace C2MP.Core {
     public class C2MPOptions {
+        public bool isServer = true;
+        public string ip = String.Empty;
         public bool isC2MPRunning;
     }
 
@@ -32,13 +35,10 @@ namespace C2MP.Core {
         }
 
         private void Initialize() {
-            options = new C2MPOptions() {
-                isC2MPRunning = true
-            };
-
             loggingModule.LogMessage += LoggingModule_LogMessage;
             eventModule.PerformFirstTimeSetup += EventModule_PerformFirstTimeSetup;
             eventModule.SpawnServerListener += EventModule_SpawnServerListener;
+            eventModule.SpawnTcpDataReceiveThread += EventModule_SpawnTcpDataReceiveThread;
             eventModule.BuildCarRecord += EventModule_BuildCarRecord;
             eventModule.BuildTrackRecord += EventModule_BuildTrackRecord;
 
@@ -51,6 +51,14 @@ namespace C2MP.Core {
                 { "configlocation", () => this.loggingModule.Log(this.configModule.ConfigFileLocation) },
                 { "exit", this.Exit }
             };
+        }
+
+        private void EventModule_SpawnTcpDataReceiveThread(object? sender, EventArgs e) {
+            Thread tcpDataReceiveThread =
+                new Thread(() => new TcpDataReceiveThread(
+                    loggingModule.Of("TcpDataReceiveThread"), configModule, options).Run());
+            tcpDataReceiveThread.Name = "TcpDataReceiveThread";
+            tcpDataReceiveThread.Start();
         }
 
         private void EventModule_SpawnServerListener(object? sender, EventArgs e) {
@@ -92,7 +100,13 @@ namespace C2MP.Core {
             eventModule.RaiseShutdownServerListener(this);
         }
 
-        public void Run() {
+        public void Run(bool isServer = true, string ip = "") {
+            options = new C2MPOptions() {
+                ip = ip,
+                isServer = isServer,
+                isC2MPRunning = true
+            };
+
             Initialize();
 
             if (!options.isC2MPRunning) {
@@ -100,11 +114,19 @@ namespace C2MP.Core {
                 return;
             }
 
-            Thread serverSetupThread = 
-                new Thread(() => new ServerSetupThread(
-                    loggingModule.Of("ServerSetupThread"), configModule, eventModule, options).Run());
-            serverSetupThread.Name = "ServerSetupThread";
-            serverSetupThread.Start();
+            if (options.isServer) {
+                Thread serverSetupThread =
+                    new Thread(() => new ServerSetupThread(
+                        loggingModule.Of("ServerSetupThread"), configModule, eventModule, options).Run());
+                serverSetupThread.Name = "ServerSetupThread";
+                serverSetupThread.Start();
+            } else {
+                Thread clientSetupThread =
+                    new Thread(() => new ClientSetupThread(
+                        loggingModule.Of("ClientSetupThread"), configModule, eventModule, options).Run());
+                clientSetupThread.Name = "ClientSetupThread";
+                clientSetupThread.Start();
+            }
         }
 
         private void Exit() {

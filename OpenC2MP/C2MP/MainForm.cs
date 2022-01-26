@@ -4,14 +4,9 @@ using C2MP.Core.Modules.GameData;
 using C2MP.ToxicRagers;
 
 namespace C2MP {
-    public enum ChosenRole {
-        HOST,
-        JOIN
-    }
-
     public partial class MainForm : Form {
         // TODO: use this to make C2MPCore's main() spawn ClientSetupThread instead of ServerSetupThread
-        public ChosenRole chosenRole = ChosenRole.HOST;
+        public ChosenSettings chosenSettings = new ChosenSettings();
         public HostJoinSelection hostJoinSelection;
 
         private Main main;
@@ -243,11 +238,19 @@ namespace C2MP {
         private void MainForm_Load(object sender, EventArgs e) {
             this.boldFont = new Font(this.rtbLog.Font, FontStyle.Bold);
 
+            if (chosenSettings.role == Role.JOIN) {
+                gboSettings.Text += " (Read-only)";
+                cboTracks.Hide();
+
+                lblMode.Hide();
+                cboMode.Hide();
+            }
+
             this.main = new Main();
             this.main.loggingModule.LogMessage += Main_LogMessage;
             this.main.eventModule.CarRecordBuilt += EventModule_CarRecordBuilt;
             this.main.eventModule.TrackRecordBuilt += EventModule_TrackRecordBuilt;
-            this.main.Run();
+            this.main.Run(chosenSettings.role == Role.HOST, chosenSettings.ip);
 
             AutoCompleteStringCollection chatCommands = new AutoCompleteStringCollection();
             foreach (string chatCommandKey in this.main.chatCommands.Keys) {

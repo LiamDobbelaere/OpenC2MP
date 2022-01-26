@@ -26,5 +26,8 @@ namespace C2MP.Core.Modules {
 
         public event EventHandler ShutdownServerListener = delegate { };
         internal void RaiseShutdownServerListener(object sender) => ShutdownServerListener.Invoke(sender, EventArgs.Empty);
+
+        public event EventHandler SpawnTcpDataReceiveThread = delegate { };
+        internal void RaiseSpawnTcpDataReceiveThread(object sender) => SpawnTcpDataReceiveThread.Invoke(sender, EventArgs.Empty);
     }
 }

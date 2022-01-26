@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.GroupBox groupBox1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.gboSettings = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.lblMode = new System.Windows.Forms.Label();
+            this.cboMode = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.cboTracks = new System.Windows.Forms.ComboBox();
@@ -68,8 +68,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStaticLog = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            groupBox1.SuspendLayout();
+            this.gboSettings.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxTrackImage)).BeginInit();
@@ -90,33 +89,33 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gboSettings
             // 
-            groupBox1.Controls.Add(this.flowLayoutPanel8);
-            groupBox1.Controls.Add(this.flowLayoutPanel7);
-            groupBox1.Controls.Add(this.flowLayoutPanel6);
-            groupBox1.Controls.Add(this.flowLayoutPanel5);
-            groupBox1.Controls.Add(this.flowLayoutPanel4);
-            groupBox1.Controls.Add(this.flowLayoutPanel3);
-            groupBox1.Controls.Add(this.flowLayoutPanel2);
-            groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            groupBox1.Location = new System.Drawing.Point(8, 8);
-            groupBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 7);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new System.Windows.Forms.Padding(8);
-            groupBox1.Size = new System.Drawing.Size(174, 429);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Game Settings";
+            this.gboSettings.Controls.Add(this.flowLayoutPanel8);
+            this.gboSettings.Controls.Add(this.flowLayoutPanel7);
+            this.gboSettings.Controls.Add(this.flowLayoutPanel6);
+            this.gboSettings.Controls.Add(this.flowLayoutPanel5);
+            this.gboSettings.Controls.Add(this.flowLayoutPanel4);
+            this.gboSettings.Controls.Add(this.flowLayoutPanel3);
+            this.gboSettings.Controls.Add(this.flowLayoutPanel2);
+            this.gboSettings.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gboSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gboSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.gboSettings.Location = new System.Drawing.Point(8, 8);
+            this.gboSettings.Margin = new System.Windows.Forms.Padding(8, 8, 8, 7);
+            this.gboSettings.Name = "gboSettings";
+            this.gboSettings.Padding = new System.Windows.Forms.Padding(8);
+            this.gboSettings.Size = new System.Drawing.Size(174, 429);
+            this.gboSettings.TabIndex = 0;
+            this.gboSettings.TabStop = false;
+            this.gboSettings.Text = "Game Settings";
             // 
             // flowLayoutPanel8
             // 
             this.flowLayoutPanel8.AutoSize = true;
             this.flowLayoutPanel8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel8.Controls.Add(this.label4);
-            this.flowLayoutPanel8.Controls.Add(this.comboBox2);
+            this.flowLayoutPanel8.Controls.Add(this.lblMode);
+            this.flowLayoutPanel8.Controls.Add(this.cboMode);
             this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel8.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel8.Location = new System.Drawing.Point(8, 359);
@@ -127,30 +126,30 @@
             this.flowLayoutPanel8.TabIndex = 11;
             this.flowLayoutPanel8.WrapContents = false;
             // 
-            // label4
+            // lblMode
             // 
-            this.label4.AutoSize = true;
-            this.label4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label4.Location = new System.Drawing.Point(4, 4);
-            this.label4.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Mode";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMode.AutoSize = true;
+            this.lblMode.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.lblMode.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblMode.Location = new System.Drawing.Point(4, 4);
+            this.lblMode.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.lblMode.Name = "lblMode";
+            this.lblMode.Size = new System.Drawing.Size(38, 15);
+            this.lblMode.TabIndex = 1;
+            this.lblMode.Text = "Mode";
+            this.lblMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBox2
+            // cboMode
             // 
-            this.comboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
-            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(7, 22);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(144, 23);
-            this.comboBox2.TabIndex = 2;
+            this.cboMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.cboMode.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cboMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.cboMode.FormattingEnabled = true;
+            this.cboMode.Location = new System.Drawing.Point(7, 22);
+            this.cboMode.Name = "cboMode";
+            this.cboMode.Size = new System.Drawing.Size(144, 23);
+            this.cboMode.TabIndex = 2;
             // 
             // flowLayoutPanel7
             // 
@@ -370,7 +369,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
-            this.tableLayoutPanel1.Controls.Add(groupBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gboSettings, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -412,7 +411,7 @@
             // 
             // txtChatCommands
             // 
-            this.txtChatCommands.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.txtChatCommands.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(25)))));
             this.txtChatCommands.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtChatCommands.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.txtChatCommands.Location = new System.Drawing.Point(0, 413);
@@ -602,8 +601,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            this.gboSettings.ResumeLayout(false);
+            this.gboSettings.PerformLayout();
             this.flowLayoutPanel8.ResumeLayout(false);
             this.flowLayoutPanel8.PerformLayout();
             this.flowLayoutPanel7.ResumeLayout(false);
@@ -656,8 +655,8 @@
         private TableLayoutPanel tableLayoutPanel2;
         private TextBox txtChatCommands;
         private FlowLayoutPanel flowLayoutPanel8;
-        private Label label4;
-        private ComboBox comboBox2;
+        private Label lblMode;
+        private ComboBox cboMode;
         private FlowLayoutPanel flowLayoutPanel7;
         private Label label3;
         private ComboBox cboTracks;
@@ -675,5 +674,6 @@
         private TableLayoutPanel tableLayoutPanel4;
         private ToolStripStatusLabel lblStaticLog;
         private PictureBox pbxTrackImage;
+        private GroupBox gboSettings;
     }
 }

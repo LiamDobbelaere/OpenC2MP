@@ -14,17 +14,19 @@ namespace C2MP {
             InitializeComponent();
         }
 
-        private void pbxHost_Click(object sender, EventArgs e) {
+        private void btnHost_Click(object sender, EventArgs e) {
             MainForm form = new MainForm();
-            form.chosenRole = ChosenRole.HOST;
+            form.chosenSettings.role = Role.HOST;
+            form.chosenSettings.ip = String.Empty;
             form.hostJoinSelection = this;
             form.Show();
             this.Hide();
         }
 
-        private void pbxJoin_Click(object sender, EventArgs e) {
+        private void btnJoin_Click(object sender, EventArgs e) {
             MainForm form = new MainForm();
-            form.chosenRole = ChosenRole.JOIN;
+            form.chosenSettings.role = Role.JOIN;
+            form.chosenSettings.ip = txtIP.Text;
             form.hostJoinSelection = this;
             form.Show();
             this.Hide();
