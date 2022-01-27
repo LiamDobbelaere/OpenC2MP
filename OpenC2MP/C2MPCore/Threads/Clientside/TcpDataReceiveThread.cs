@@ -22,7 +22,7 @@ namespace C2MP.Core.Threads.Clientside {
         public void Run() {
             loggingModule.Log($"Connecting to {options.ip}..");
 
-            Socket tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            TcpClient tcpSocket = new TcpClient();
             tcpSocket.NoDelay = true;
 
             // C2O does this and I don't know why yet

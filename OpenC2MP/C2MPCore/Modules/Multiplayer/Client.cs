@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace C2MP.Core.Modules.Multiplayer {
     public class Client {
-        public Socket tcpClientSocket;
-        public Socket udpClientSocket;
+        public TcpClient tcpClientSocket;
+        public UdpClient udpClientSocket;
         public string clientName;
     }
 }

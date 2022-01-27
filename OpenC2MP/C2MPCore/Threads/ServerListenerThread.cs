@@ -31,42 +31,23 @@ namespace C2MP.Core.Threads {
         public void Run() {
             Random random = new Random();
 
-            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, configModule.Config.port);
+            TcpListener tcpSocket = new TcpListener(IPAddress.Any, configModule.Config.port);
+            tcpSocket.Server.ReceiveBufferSize = 1024; // C2O does this and I don't know why yet
+            tcpSocket.Start();
 
-            // ****
-            // TODO: Sigh, use TcpListener and UdpClient instead of manually making sockets, silly
-            // ****
-
-
-
-
-
-
-
-
-
-
-
-
-            Socket tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            tcpSocket.ReceiveBufferSize = 1024; // C2O does this and I don't know why yet
-
-            tcpSocket.Bind(localEndPoint);
-            tcpSocket.Listen();
-
-            loggingModule.Log($"TCP server socket running on port {localEndPoint.Port}");
+            loggingModule.Log($"TCP server socket running on port {tcpSocket.Server.GetPort()}");
 
             // in case of shutdown, try to close stuff up cleanly
             eventModule.ShutdownServerListener += (object? sender, EventArgs e) => {
-                tcpSocket.Close();
+                tcpSocket.Stop();
             };
 
-            Socket udpClientSocket = null;
+            UdpClient udpClientSocket = null;
 
             // Allows this thread to be shutdown cleanly
             while (options.isC2MPRunning) {
                 try {
-                    Socket tcpClientSocket = tcpSocket.Accept();
+                    TcpClient tcpClientSocket = tcpSocket.AcceptTcpClient();
 
                     tcpClientSocket.NoDelay = true;
                     tcpClientSocket.ReceiveBufferSize = 1024;
@@ -83,22 +64,20 @@ namespace C2MP.Core.Threads {
 
                     // I don't know why C2O did this just yet
                     if (udpClientSocket != null) {
-                        if (udpClientSocket.Connected && udpClientSocket.GetPort() == udpPort) {
+                        if (udpClientSocket.Client.Connected && udpClientSocket.Client.GetPort() == udpPort) {
                             udpClientSocket.Close();
                         }
                     }
 
-                    IPEndPoint localUdpEndpoint = new IPEndPoint(IPAddress.Loopback, udpPort);
+                    udpClientSocket = new UdpClient(udpPort);
 
-                    udpClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
-                    udpClientSocket.SendBufferSize = 4096;
-                    udpClientSocket.ReceiveBufferSize = 4096;
+                    udpClientSocket.Client.SendBufferSize = 4096;
+                    udpClientSocket.Client.ReceiveBufferSize = 4096;
                     
                     //tcpSocket.Bind(localUdpEndpoint);
                     //tcpSocket.Connect();
 
-                    loggingModule.Log($"Client UDP socket OK on port {udpClientSocket.GetPort()}..", LogMessageKind.INFO);
+                    loggingModule.Log($"Client UDP socket OK on port {udpClientSocket.Client.GetPort()}..", LogMessageKind.INFO);
 
                     multiplayerModule.AddClient(new Client {
                         tcpClientSocket = tcpClientSocket,

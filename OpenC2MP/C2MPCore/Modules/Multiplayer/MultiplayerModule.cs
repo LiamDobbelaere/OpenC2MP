@@ -23,7 +23,7 @@ namespace C2MP.Core.Modules.Multiplayer {
 
         public bool IsPortAvailable(int udpPort) {
             foreach (Client client in clients) {
-                if (client.udpClientSocket != null && client.udpClientSocket.GetPort() == udpPort) {
+                if (client.udpClientSocket != null && client.udpClientSocket.Client.GetPort() == udpPort) {
                     return false;
                 }
             }
