@@ -18,6 +18,10 @@
             LogMessage.Invoke(this, message, prefix, kind);
         }
 
+        public void LogException(string message, Exception ex, LogMessageKind kind = LogMessageKind.ERROR) {
+            LogMessage.Invoke(this, $"{message}{Environment.NewLine}{Environment.NewLine}{ex.ToString()}", prefix, kind);
+        }
+
         public void Log(string message, string prefixOverload, LogMessageKind kind = LogMessageKind.INFO) {
             LogMessage.Invoke(this, message, prefixOverload, kind);
         }
