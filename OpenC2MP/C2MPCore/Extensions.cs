@@ -28,6 +28,10 @@ namespace C2MP.Core {
             return false;
         }
 
+        public static byte[] GetBytes(this string text) {
+            return Encoding.ASCII.GetBytes(text);
+        }
+
         public static string EraseComment(this string configLine) {
             return configLine.Split('/')[0].Trim();
         }

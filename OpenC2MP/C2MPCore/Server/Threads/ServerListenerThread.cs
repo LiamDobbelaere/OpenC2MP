@@ -76,11 +76,7 @@ namespace C2MP.Core.Server.Threads {
                     
                     loggingModule.Log($"Client UDP socket OK on port {udpClientSocket.Client.GetPort()}..", LogMessageKind.INFO);
 
-                    multiplayerModule.AddClient(new Modules.Multiplayer.Client(eventModule) {
-                        tcpClientSocket = tcpClientSocket,
-                        udpClientSocket = udpClientSocket,
-                        clientName = $"NewClient-{totalConnections}"
-                    });
+                    multiplayerModule.AddClient(new Modules.Multiplayer.Client(eventModule, tcpClientSocket, udpClientSocket, $"NewClient-{totalConnections}"));
                 } catch (SocketException ex) {
                     loggingModule.Log($"TCP server socket accept was interrupted, reason: {ex.Message}", LogMessageKind.ERROR);
                 }

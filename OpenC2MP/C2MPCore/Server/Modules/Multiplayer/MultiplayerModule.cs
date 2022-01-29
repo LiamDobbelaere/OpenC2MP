@@ -1,4 +1,5 @@
-﻿using C2MP.Core.Shared.Modules;
+﻿using C2MP.Core.Server.Modules.Multiplayer.Packets;
+using C2MP.Core.Shared.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,24 @@ namespace C2MP.Core.Server.Modules.Multiplayer {
 
         public void AddClient(Client client) {
             this.clients.Add(client);
+        }
+
+        public void RemoveClient(Client client) {
+            this.clients.Remove(client);
+        }
+
+        public void ResetClientCarNumbers() {
+            // TODO: implement
+        }
+
+        public void BroadcastAddClientExcept(Client exceptClient) {
+            foreach (Client client in clients) {
+                if (client.clientName == exceptClient.clientName) {
+                    continue;
+                }
+
+                client.SendMessage(new AddPacket(exceptClient).Pack(), false, false);
+            }
         }
     }
 }

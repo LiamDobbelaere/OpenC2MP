@@ -34,5 +34,11 @@
 
         public event EventHandler<ClientEventArgs> SpawnServerDataTransmissionThread = delegate { };
         internal void RaiseSpawnServerDataTransmissionThread(object sender, ClientEventArgs args) => SpawnServerDataTransmissionThread.Invoke(sender, args);
+
+        public event EventHandler<ClientEventArgs> SpawnServerTcpDataReceiveThread = delegate { };
+        internal void RaiseSpawnServerTcpDataReceiveThread(object sender, ClientEventArgs args) => SpawnServerTcpDataReceiveThread.Invoke(sender, args);
+
+        public event EventHandler<ClientEventArgs> SpawnServerUdpDataReceiveThread = delegate { };
+        internal void RaiseSpawnServerUdpDataReceiveThread(object sender, ClientEventArgs args) => SpawnServerUdpDataReceiveThread.Invoke(sender, args);
     }
 }

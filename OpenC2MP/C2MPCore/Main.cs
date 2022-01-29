@@ -41,6 +41,8 @@ namespace C2MP.Core {
             eventModule.SpawnServerListener += EventModule_SpawnServerListener;
             eventModule.SpawnClientTcpDataReceiveThread += EventModule_SpawnClientTcpDataReceiveThread;
             eventModule.SpawnServerDataTransmissionThread += EventModule_SpawnServerDataTransmissionThread;
+            eventModule.SpawnServerTcpDataReceiveThread += EventModule_SpawnServerTcpDataReceiveThread;
+            eventModule.SpawnServerUdpDataReceiveThread += EventModule_SpawnServerUdpDataReceiveThread;
             eventModule.BuildCarRecord += EventModule_BuildCarRecord;
             eventModule.BuildTrackRecord += EventModule_BuildTrackRecord;
 
@@ -55,10 +57,21 @@ namespace C2MP.Core {
             };
         }
 
+        private void EventModule_SpawnServerUdpDataReceiveThread(object? sender, ClientEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void EventModule_SpawnServerTcpDataReceiveThread(object? sender, ClientEventArgs e) {
+            Thread serverTcpDataReceiveThread =
+                new Thread(() => new ServerTcpDataReceiveThread(e.Client, loggingModule, multiplayerModule).Run());
+            serverTcpDataReceiveThread.Name = e.Client.clientName + "-ServerTcpDataReceiveThread";
+            serverTcpDataReceiveThread.Start();
+        }
+
         private void EventModule_SpawnServerDataTransmissionThread(object? sender, ClientEventArgs e) {
             Thread serverDataTransmissionThread =
-                new Thread(() => new ServerDataTransmissionThread(e.Client).Run());
-            serverDataTransmissionThread.Name = "ServerDataTransmissionThread";
+                new Thread(() => new ServerDataTransmissionThread(e.Client, loggingModule, eventModule, multiplayerModule).Run());
+            serverDataTransmissionThread.Name = e.Client.clientName + "-ServerDataTransmissionThread";
             serverDataTransmissionThread.Start();
         }
 
