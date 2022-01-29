@@ -1,11 +1,7 @@
-﻿using C2MP.Core.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using C2MP.Core.Shared.Modules;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace C2MP.Core.Threads {
+namespace C2MP.Core.Server.Threads {
     internal class PerformFirstTimeSetupThread {
         private LoggingModule loggingModule;
         private ConfigModule configModule;

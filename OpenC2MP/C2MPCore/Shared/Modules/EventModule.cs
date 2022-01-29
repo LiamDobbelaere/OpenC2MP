@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace C2MP.Core.Shared.Modules {
+    public class ClientEventArgs : EventArgs {
+        public ClientEventArgs(Server.Modules.Multiplayer.Client client) {
+            Client = client;
+        }
 
-namespace C2MP.Core.Modules {
+        public Server.Modules.Multiplayer.Client Client { get; set; } 
+    }
+
     public class EventModule {
         public event EventHandler PerformFirstTimeSetup = delegate { };
         internal void RaisePerformFirstTimeSetup(object sender) => PerformFirstTimeSetup.Invoke(sender, EventArgs.Empty);
@@ -27,7 +29,10 @@ namespace C2MP.Core.Modules {
         public event EventHandler ShutdownServerListener = delegate { };
         internal void RaiseShutdownServerListener(object sender) => ShutdownServerListener.Invoke(sender, EventArgs.Empty);
 
-        public event EventHandler SpawnTcpDataReceiveThread = delegate { };
-        internal void RaiseSpawnTcpDataReceiveThread(object sender) => SpawnTcpDataReceiveThread.Invoke(sender, EventArgs.Empty);
+        public event EventHandler SpawnClientTcpDataReceiveThread = delegate { };
+        internal void RaiseSpawnClientTcpDataReceiveThread(object sender) => SpawnClientTcpDataReceiveThread.Invoke(sender, EventArgs.Empty);
+
+        public event EventHandler<ClientEventArgs> SpawnServerDataTransmissionThread = delegate { };
+        internal void RaiseSpawnServerDataTransmissionThread(object sender, ClientEventArgs args) => SpawnServerDataTransmissionThread.Invoke(sender, args);
     }
 }

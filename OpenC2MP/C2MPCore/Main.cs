@@ -1,8 +1,9 @@
-﻿using C2MP.Core.Modules;
-using C2MP.Core.Modules.GameData;
-using C2MP.Core.Modules.Multiplayer;
-using C2MP.Core.Threads;
-using C2MP.Core.Threads.Clientside;
+﻿using C2MP.Core.Client.Threads;
+using C2MP.Core.Server.Modules.Multiplayer;
+using C2MP.Core.Server.Modules.Multiplayer.Threads;
+using C2MP.Core.Server.Threads;
+using C2MP.Core.Shared.Modules;
+using C2MP.Core.Shared.Modules.GameData;
 
 namespace C2MP.Core {
     public class C2MPOptions {
@@ -38,7 +39,8 @@ namespace C2MP.Core {
             loggingModule.LogMessage += LoggingModule_LogMessage;
             eventModule.PerformFirstTimeSetup += EventModule_PerformFirstTimeSetup;
             eventModule.SpawnServerListener += EventModule_SpawnServerListener;
-            eventModule.SpawnTcpDataReceiveThread += EventModule_SpawnTcpDataReceiveThread;
+            eventModule.SpawnClientTcpDataReceiveThread += EventModule_SpawnClientTcpDataReceiveThread;
+            eventModule.SpawnServerDataTransmissionThread += EventModule_SpawnServerDataTransmissionThread;
             eventModule.BuildCarRecord += EventModule_BuildCarRecord;
             eventModule.BuildTrackRecord += EventModule_BuildTrackRecord;
 
@@ -53,11 +55,18 @@ namespace C2MP.Core {
             };
         }
 
-        private void EventModule_SpawnTcpDataReceiveThread(object? sender, EventArgs e) {
+        private void EventModule_SpawnServerDataTransmissionThread(object? sender, ClientEventArgs e) {
+            Thread serverDataTransmissionThread =
+                new Thread(() => new ServerDataTransmissionThread(e.Client).Run());
+            serverDataTransmissionThread.Name = "ServerDataTransmissionThread";
+            serverDataTransmissionThread.Start();
+        }
+
+        private void EventModule_SpawnClientTcpDataReceiveThread(object? sender, EventArgs e) {
             Thread tcpDataReceiveThread =
-                new Thread(() => new TcpDataReceiveThread(
-                    loggingModule.Of("TcpDataReceiveThread"), configModule, options).Run());
-            tcpDataReceiveThread.Name = "TcpDataReceiveThread";
+                new Thread(() => new ClientTcpDataReceiveThread(
+                    loggingModule.Of("ClientTcpDataReceiveThread"), configModule, options).Run());
+            tcpDataReceiveThread.Name = "ClientTcpDataReceiveThread";
             tcpDataReceiveThread.Start();
         }
 

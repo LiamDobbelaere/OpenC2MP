@@ -1,4 +1,4 @@
-﻿namespace C2MP.Core.Modules {
+﻿namespace C2MP.Core.Shared.Modules {
     public enum LogMessageKind {
         INFO, // generic
         WARN, // warning

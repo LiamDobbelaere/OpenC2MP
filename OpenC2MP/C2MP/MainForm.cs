@@ -1,6 +1,6 @@
 ﻿using C2MP.Core;
-using C2MP.Core.Modules;
-using C2MP.Core.Modules.GameData;
+using C2MP.Core.Shared.Modules;
+using C2MP.Core.Shared.Modules.GameData;
 using C2MP.ToxicRagers;
 
 namespace C2MP {

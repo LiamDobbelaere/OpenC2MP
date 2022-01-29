@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C2MP.Core.Modules.GameData {
+﻿namespace C2MP.Core.Shared.Modules.GameData {
     public class GameDataModule {
         private ConfigModule configModule;
         private LoggingModule loggingModule;

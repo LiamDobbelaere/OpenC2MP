@@ -1,11 +1,12 @@
-﻿using System;
+﻿using C2MP.Core.Shared.Modules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C2MP.Core.Modules.Multiplayer {
+namespace C2MP.Core.Server.Modules.Multiplayer {
     public class MultiplayerModule {
         private ConfigModule configModule;
         private LoggingModule loggingModule;

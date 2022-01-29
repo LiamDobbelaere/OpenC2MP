@@ -1,9 +1,9 @@
-﻿using C2MP.Core.Modules;
-using C2MP.Core.Modules.Multiplayer;
+﻿using C2MP.Core.Server.Modules.Multiplayer;
+using C2MP.Core.Shared.Modules;
 using System.Net;
 using System.Net.Sockets;
 
-namespace C2MP.Core.Threads {
+namespace C2MP.Core.Server.Threads {
     internal class ServerListenerThread {
         private LoggingModule loggingModule;
         private ConfigModule configModule;
@@ -74,12 +74,9 @@ namespace C2MP.Core.Threads {
                     udpClientSocket.Client.SendBufferSize = 4096;
                     udpClientSocket.Client.ReceiveBufferSize = 4096;
                     
-                    //tcpSocket.Bind(localUdpEndpoint);
-                    //tcpSocket.Connect();
-
                     loggingModule.Log($"Client UDP socket OK on port {udpClientSocket.Client.GetPort()}..", LogMessageKind.INFO);
 
-                    multiplayerModule.AddClient(new Client {
+                    multiplayerModule.AddClient(new Modules.Multiplayer.Client(eventModule) {
                         tcpClientSocket = tcpClientSocket,
                         udpClientSocket = udpClientSocket,
                         clientName = $"NewClient-{totalConnections}"

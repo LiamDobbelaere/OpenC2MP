@@ -1,4 +1,4 @@
-﻿namespace C2MP.Core.Modules {
+﻿namespace C2MP.Core.Shared.Modules {
     public class C2MPConfig {
         // The values that are set here are the default values
         public string nickname = "BuzzLightweight";

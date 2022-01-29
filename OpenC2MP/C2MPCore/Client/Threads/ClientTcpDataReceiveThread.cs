@@ -1,17 +1,11 @@
-﻿using C2MP.Core.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using C2MP.Core.Shared.Modules;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace C2MP.Core.Threads.Clientside {
+namespace C2MP.Core.Client.Threads {
     // NOTE: Serverside also has a TcpDataReceiveThread w/ different logic! Should probably name that one ServerTcpDataReceiveThread
     // But don't confuse the two in the Java decompilation, they are obviously different as the server shouldn't run the client's logic
 
-    internal class TcpDataReceiveThread {
+    internal class ClientTcpDataReceiveThread {
         private LoggingModule loggingModule;
         private ConfigModule configModule;
         private C2MPOptions options;
@@ -19,7 +13,7 @@ namespace C2MP.Core.Threads.Clientside {
         private Action notYetImplemented = () => { }; // purely used to have one unique reference to this function
         private Dictionary<string, Action> tcpClientCommands;
 
-        public TcpDataReceiveThread(LoggingModule loggingModule, ConfigModule configModule, C2MPOptions options) {
+        public ClientTcpDataReceiveThread(LoggingModule loggingModule, ConfigModule configModule, C2MPOptions options) {
             this.loggingModule = loggingModule;
             this.configModule = configModule;
             this.options = options;
@@ -82,7 +76,7 @@ namespace C2MP.Core.Threads.Clientside {
             tcpSocket.SendBufferSize = 1024;
             tcpSocket.ReceiveBufferSize = 1024;
 
-            while (!tcpSocket.Connected) {
+            while (!tcpSocket.Connected && options.isC2MPRunning) {
                 try {
                     tcpSocket.Connect(options.ip, configModule.Config.port);
                     loggingModule.Log($"TCP connection ok with {options.ip}:{configModule.Config.port}");
